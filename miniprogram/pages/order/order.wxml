@@ -1,0 +1,36 @@
+<view id="order">
+  <van-tabs custom-class="tab" active="{{ active }}" bind:change="onChange" color="#1E90FF">
+    <van-tab title="已发布"></van-tab>
+    <van-tab title="已接受"></van-tab>
+  </van-tabs>
+
+  <scroll-view class="content" scroll-y="true" >
+      <van-card
+      custom-class="card"
+      wx:for="{{my_orders}}"
+      wx:for-item="item"
+      desc="{{item.remark}}"
+      bindtap="onClickOrder"
+      wx:key="_id"
+      data-id="{{item._id}}"
+    >
+    <view class="card_title" slot="title">
+      {{item.title}}
+    </view>
+    <view class="card_score"  slot="price">
+      {{item.score}} 积分
+    </view> 
+      <view slot="bottom">
+        <van-tag size="medium" plain type="primary">{{item.weight}}</van-tag>
+      </view>
+      <view slot="footer">
+        <view>{{item.publish_time}}</view>
+      </view>
+      <view slot="footer">
+        <button class="cancel_button" color="#ff0000" >取消委托</button>
+      </view>
+    </van-card>
+    
+  </scroll-view >
+
+</view>

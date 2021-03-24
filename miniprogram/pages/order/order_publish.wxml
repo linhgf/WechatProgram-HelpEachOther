@@ -1,0 +1,98 @@
+<view id="order_detail">
+  <van-cell title="订单发布" model:value="填写订单信息" />
+  <view class="detail">
+    <van-cell-group>
+      <van-field
+        model:value="{{ title }}"
+        required
+        clearable
+        label="标题"
+        placeholder="填写标题"
+        border="{{ false }}"
+      />
+      <van-field
+        model:value="{{ contact }}"
+        required
+        clearable
+        label="联系人"
+        placeholder="填写联系人"
+        border="{{ false }}"
+      />
+      <van-field
+        model:value="{{ telephone }}"
+        required
+        clearable
+        label="联系方式"
+        placeholder="请输入联系方式"
+      />
+      <van-field
+        value="{{ category }}"
+        required
+        clearable
+        label="订单类型"
+        readonly="true"
+        placeholder="选择订单类型"
+        bind:click-input="onCategoryOpen"
+      />
+      <van-action-sheet
+      show="{{ category_show }}"
+      actions="{{ category_actions }}"
+      bind:close="onCategoryClose"
+      bind:select="onCategorySelect"
+     />
+     <van-field
+        value="{{ weight }}"
+        required
+        clearable
+        label="包裹大小"
+        readonly="true"
+        placeholder="选择包裹大小"
+        bind:click-input="onWeightOpen"
+      />
+      <van-action-sheet
+      show="{{ weight_show }}"
+      actions="{{ weight_actions }}"
+      bind:close="onWeightClose"
+      bind:select="onWeightSelect"
+     />
+      <van-field
+        model:value="{{ pack }}"
+        required
+        clearable
+        label="包裹内容"
+        placeholder="填写包裹内容(可简要描述)"
+        border="{{ false }}"
+      />
+      <van-field
+        model:value="{{ address }}"
+        required
+        clearable
+        label="取件地址"
+        placeholder="填写取件地址"
+        border="{{ false }}"
+      />
+      <van-field
+        model:value="{{ award }}"
+        clearable
+        label="额外悬赏"
+        placeholder="请输入悬赏积分"
+      />
+      <van-field
+        model:value="{{ remark }}"
+        clearable
+        label="备注"
+        placeholder="填写备注"
+        border="{{ false }}"
+      />
+    </van-cell-group>
+  </view>
+  
+
+  <button bindtap="onPublish" class="publish_order_button">
+    发布
+  </button>
+
+  <van-dialog id="van-dialog" />
+  <van-toast id="van-toast" />
+  
+</view>

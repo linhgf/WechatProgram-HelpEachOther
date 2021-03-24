@@ -1,0 +1,19 @@
+<view id="order_detail">
+  <van-panel title="{{order.title}}" desc="{{order.category}}" status="{{order.status}}" />
+  <view class="detail">
+    <van-panel title="联系人" desc="{{order.contact}}" />
+    <van-panel title="联系方式" desc="{{order.telephone}}" />
+    <van-panel title="包裹内容" desc="{{order.pack}}" />
+    <van-panel title="发布时间" desc="{{order.published_time}}" />
+    <van-panel title="取件地址" desc="{{order.address}}" />
+    <van-panel title="包裹大小" desc="{{order.weight}}" />
+    <van-panel title="备注" desc="{{order.remark}}" />
+  </view>
+  <button class="take_order_button" bindtap="onTakeOrder">
+    接受
+  </button>
+  
+  <van-dialog id="van-dialog" />
+  <van-toast id="van-toast" />
+
+</view>

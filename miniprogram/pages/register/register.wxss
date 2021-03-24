@@ -1,0 +1,88 @@
+/* pages/login/login.wxss */
+page{
+  height: 100%;
+  background:#1E90FF;
+}
+
+/*整个界面样式*/
+#regist{
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+
+/*头像样式*/
+.userAvatar{
+  position: absolute;
+  top: 10%;
+  left:50%;
+  box-shadow: 0 0 0 10rpx rgba(0, 0, 0, 0.15) ;
+  border-width: 20px;
+  width: 200rpx;
+  height: 200rpx;
+  transform: translateX(-100rpx);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+/*下半部样式*/
+.userinfo_input{
+  display: flex;
+  width: 100%;
+  height: 80%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background:#ffffff
+}
+
+.title{
+  transform: translateX(50rpx);
+  color: #1E90FF;
+  font-size: 40rpx;
+}
+
+.userinfo_cell_group{
+  transform: translateY(80rpx);
+  width: 70%;
+}
+
+.username_input, .password_input{
+  width: 100% !important;
+}
+
+.username_block, .password_block{
+  margin: 20rpx;
+}
+
+.regist_button{
+  transform: translateY(90rpx);
+}
+
+.login_button{
+  font-size: 25rpx;
+  color: #7c7c7c;
+  background-color: #ffffff;
+  transform: translateY(80rpx);
+}
+
+.login_button::after{
+  border: none;
+}
+
+.team_name{
+  position: absolute;
+  bottom: 0%;
+}
+
+.team_name text{
+  font-size: 25rpx;
+  color: #969696;
+}
+
+#van-toast{
+  text-align: center !important;
+}

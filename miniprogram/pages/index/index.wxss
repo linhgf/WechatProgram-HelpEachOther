@@ -1,0 +1,80 @@
+page{
+  height: 100%;
+  background: rgba(233, 233, 233, 0.623);
+}
+#index{
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+.top{
+  display: flex;
+  flex-direction: row;
+  height: 120rpx;
+  background:#1E90FF;
+  justify-content: flex-start;
+}
+
+.search{
+  width: 100%;
+}
+
+.user{
+  width: 100rpx;
+  height: 90rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 10rpx 0 10rpx 20rpx;
+}
+
+.content{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.card{
+  transform: translateX(20rpx);
+  border-radius: 10px;
+  overflow: hidden;
+  width: 95%;
+  margin-bottom: 20rpx;
+  background: #ffffff !important;
+}
+
+.menu{
+  border-style: solid;
+  border-width: 0 0 0.1rpx 0;
+  border-color: #d1d1d1;
+}
+
+.menu_toTop{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+  border-style: solid;
+  border-width: 0 0 0.1rpx 0;
+  border-color: #d1d1d1;
+}
+
+.card_title{
+  font-size: 32rpx;
+}
+
+.card_score{
+  font-size:28rpx;
+}
+
+.van-card{
+  border-style: solid !important;
+  border-width: 0 0 0.1rpx 0 !important;
+  border-color: rgb(180, 180, 180) !important;
+}
+
+.van-tab{
+  border-style: solid !important;
+  border-width: 0 0 0.1rpx 0 !important;
+  border-color: #d1d1d1 !important;
+}

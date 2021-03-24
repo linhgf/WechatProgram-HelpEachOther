@@ -1,0 +1,51 @@
+<scroll-view bindscroll="onScrolling" scroll-y="true" id="index">
+  
+  <view class="top">
+    <open-data type="userAvatarUrl" class="user"/>
+    <van-search
+    class="search"
+    value="{{ search_value }}"
+    placeholder="请输入搜索关键词"
+    bind:search="onSearch"
+    bind:change="onSearchChange"
+    background="#1E90FF"
+    input-align="left"
+    />
+  </view>
+
+  <view class="content" >
+    <van-dropdown-menu class="menu'">
+      <van-dropdown-item value="{{ express_choosed }}" options="{{ express }}" />
+      <van-dropdown-item value="{{ sort_choosed }}" options="{{ sort }}" />
+    </van-dropdown-menu>
+    <van-dropdown-menu class="menu_toTop" wx:if="{{toTop > 58}}">
+      <van-dropdown-item value="{{ express_choosed }}" options="{{ express }}" />
+      <van-dropdown-item value="{{ sort_choosed }}" options="{{ sort }}" />
+    </van-dropdown-menu>
+    <van-card
+      custom-class="card"
+      wx:for="{{orders}}"
+      wx:for-item="item"
+      desc="{{item.remark}}"
+      bindtap="onClickOrder"
+      wx:key="_id"
+      data-id="{{item._id}}"
+    >
+    <view class="card_title" slot="title">
+      {{item.title}}
+    </view>
+    <view class="card_score"  slot="price">
+      {{item.score}} 积分
+    </view> 
+      <view slot="bottom">
+        <van-tag size="medium" plain type="primary">{{item.weight}}</van-tag>
+      </view>
+      <view slot="footer">
+        <view>{{item.publish_time}}</view>
+      </view>
+    </van-card>
+  </view>
+
+
+
+</scroll-view>

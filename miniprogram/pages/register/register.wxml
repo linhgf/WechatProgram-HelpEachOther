@@ -1,0 +1,33 @@
+<view id="regist">
+
+<block wx:if="{{canIUseOpenData}}">
+    <view class="userAvatar">
+      <open-data type="userAvatarUrl"/>
+    </view>
+</block>
+
+<view class="userinfo_input" wx:if="{{!hasuserinfo}}">
+  <van-cell-group class="userinfo_cell_group">
+    <view class="title">注册</view>
+    <view class="username_block">
+      <van-field wx:if="{{exited_stuID == false}}" clearable="true" input-class="username_input" model:value="{{ stuID }}" placeholder="学号" border="{{ false }}"/>
+      <van-field wx:if="{{exited_stuID == true}}" clearable="true" input-class="username_input" model:value="{{ stuID }}" error-message="*该账户已存在" placeholder="学号" border="{{ false }}"/>
+    </view>
+    <view class="password_block">
+      <van-field wx:if="{{wrong_length_password == false}}" clearable="true" input-class="password_input" model:value="{{ password }}" placeholder="密码" border="{{ false }}" password="true" />
+      <van-field wx:if="{{wrong_length_password == true}}" clearable="true" input-class="password_input" model:value="{{ password }}" placeholder="密码" error-message="*密码长度不得少于6位" border="{{ false }}" password="true" />
+    </view>
+    <view class="password_block">
+      <van-field  wx:if="{{wrong_confirm_password == false}}" clearable="true" input-class="password_input" model:value="{{ confirm_password }}" placeholder="确认密码" border="{{ false }}" password="true" />
+      <van-field wx:if="{{wrong_confirm_password == true}}" clearable="true" input-class="password_input" model:value="{{ confirm_password }}" placeholder="确认密码" error-message="*两次密码输入不一致" border="{{ false }}" password="true" />
+    </view>
+  </van-cell-group>
+  <van-button class="regist_button" open-type="getUserInfo" bindgetuserinfo="onGetUserinfo" color="linear-gradient(to right, #6495ED, #4169E1)">注册并登录</van-button>
+  <button class="login_button" bindtap="onToLogin">已有账号？返回登录</button> 
+</view>
+
+<view class="team_name">
+  <text>@北京师范大学珠海分校校园互助代送</text>
+</view>
+<van-toast id="van-toast" />
+</view>

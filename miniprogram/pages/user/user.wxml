@@ -1,0 +1,81 @@
+<view id="user">
+
+  <view class="top">
+    <view class="avatar_and_nickname">
+      <view class="avatar">
+        <open-data type="userAvatarUrl"/>
+      </view>
+      <view class="nickname">
+        <open-data type="userNickName"/>
+        <text>{{stuID}}</text>
+        <text>计算机科学与技术</text>
+      </view>
+    </view>
+
+    <view class="information">
+      <view class="score">
+        <text>{{score}}</text>
+        <text class="description">积分</text>
+      </view>
+      <view class="column_line"></view>
+      <view class="finished_order_num">
+        <text>{{finished}}</text>
+        <text class="description">完成</text>
+      </view>
+      <view class="column_line"></view>
+      <view class="unfinished_order_num">
+        <text>{{accepted}}</text>
+        <text class="description">待帮</text>
+      </view>
+    </view>
+
+  </view>
+ 
+  <view class="functions">
+    <view class="order logo">
+      <image src="../../icon/order.png"></image>
+      <text>订单管理</text>
+    </view>
+    <view class="message logo">
+      <image src="../../icon/message.png"></image>
+      <text>消息</text>
+    </view>
+    <view class="order_finished logo">
+      <image src="../../icon/order_finished.png"></image>
+      <text>已完成订单</text>
+    </view>
+  </view>
+
+<van-button class="publish_button" size="large" bindtap="onPublish" block type="default" color="#1E90FF">发布订单</van-button>
+
+
+  <view class="other_function">
+    <view class="title">
+      更多服务
+    </view>
+    <view class="other_function_list">
+      <view class="list">
+        <image src="../../icon/service.png"/>
+        <view>
+          联系客服
+        </view>
+      </view>
+
+      <view class="list">
+        <image src="../../icon/feedback.png"/>
+        <view>
+          使用反馈
+        </view>
+      </view>
+
+      <view class="list">
+        <image src="../../icon/loginout.png"/>
+        <view bindtap="onLoginOut">
+          退出当前账号
+        </view>
+      </view>
+
+    </view>
+  </view>
+  <van-dialog id="van-dialog" />
+</view>

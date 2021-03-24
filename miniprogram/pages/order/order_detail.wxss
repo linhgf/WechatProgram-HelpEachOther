@@ -1,0 +1,49 @@
+page{
+  width: 100%;
+  height: 100%;
+  background:rgba(233, 233, 233, 0.623);
+}
+
+#order_detail{
+  display: flex;
+  flex-direction: column;
+}
+
+.detail{
+  display: flex;
+  flex-direction: column;
+}
+
+.take_order_button{
+  position: fixed;
+  background: #1E90FF;
+  width: 100%;
+  height: 80rpx;
+  color: white;
+  border-radius: 0;
+  bottom: 0%;
+}
+
+.van-cell__title{
+  font-size:35rpx;
+}
+
+.van-cell__label{
+  font-size: 30rpx !important;
+}
+
+.detail .van-cell__title{
+  font-size:30rpx;
+}
+
+.detail .van-cell__label{
+  font-size: 30rpx !important;
+}
+
+.detail{
+  margin: 20rpx 0 80rpx 0;
+}
+
+#van-toast{
+  text-align: center !important;
+}

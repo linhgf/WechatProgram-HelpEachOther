@@ -1,4 +1,4 @@
-<scroll-view bindscroll="onScrolling" scroll-y="true" id="index">
+<scroll-view bindscroll="onScrolling" scroll-y="true" id="index" bindscrolltolower="onScrollToBottom" bindscrolltoupper="onScrollToTop">
   
   <view class="top">
     <open-data type="userAvatarUrl" class="user"/>
@@ -28,7 +28,7 @@
       wx:for-item="item"
       desc="{{item.remark}}"
       bindtap="onClickOrder"
-      wx:key="_id"
+      wx:key="none"
       data-id="{{item._id}}"
     >
     <view class="card_title" slot="title">
@@ -44,6 +44,8 @@
         <view>{{item.publish_time}}</view>
       </view>
     </van-card>
+    <van-loading wx:if="{{showLoading}}" size="24px" color="#1E90FF" vertical>在努力加载了...</van-loading>
+    
   </view>
 
 

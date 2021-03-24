@@ -38,8 +38,9 @@ exports.main = async (event, context) => {
     }})
   }
 
-  if(event.option == "get"){//懒加载 每次加载 15 条
-    return await db.collection("help_order").limit(15).get()
+
+  if(event.option == "get"){
+    return await db.collection("help_order").orderBy('publish_time','desc').skip(event.skip).limit(event.limit).get()
   }
 
   if(event.option == "getAll"){//获取全部订单

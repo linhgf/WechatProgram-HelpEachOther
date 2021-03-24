@@ -78,3 +78,9 @@ page{
   border-width: 0 0 0.1rpx 0 !important;
   border-color: #d1d1d1 !important;
 }
+
+.van-loading{
+  position: absolute;
+  left: 0;
+  right: 0;
+}

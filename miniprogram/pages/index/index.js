@@ -5,8 +5,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+    topContentLength: 124,//除去卡片 顶部内容占据124
+    showLoading: false,//展示加载图
     orders: [],
     toTop: 0,
+    limit: 5,//每次获取5条数据
+    isEndOfList: false,//为true时代表数据被取完（旧数据，新数据通过刷新获取）
     search_value: null,
     express: [
       { text: '全部订单', value: 0 },
@@ -30,7 +34,9 @@ Page({
     // wx.cloud.callFunction({
     //   name: "getOrder",
     //   data: {
-    //     option: "get"
+    //     option: "get",
+    //     skip: 0,
+    //     limit: that.data.limit
     //   }
     // }).then(res=>{
     //   console.log(res)
@@ -43,13 +49,14 @@ Page({
     //     key: 'orders',
     //   })
     // }).then(res=>{
-      
+       
     // })
     //缓存中的订单数据
     that.setData({
       orders: wx.getStorageSync('orders')
     })
     that.changeTime()
+    
   },
 
   /**
@@ -67,13 +74,50 @@ Page({
   },
 
   /**
-   * 
    * 滚动时触发
    */
   onScrolling: function(res){
     this.setData({
       toTop: res.detail.scrollTop
     })
+    
+  },
+
+  onScrollToTop: function(res){
+    console.log(res)
+  },
+
+  /**
+   * 滑动条到底部时获取额外数据
+   */
+  onGetData: function(){
+    let that = this
+    that.setData({
+      showLoading: true
+    })
+    wx.cloud.callFunction({
+      name: 'getOrder',
+      data: {
+        option: "get",
+        skip: that.data.orders.length,
+        limit: that.data.limit
+      }
+    }).then(res=>{//获取完毕
+        that.setData({
+          orders: [...that.data.orders,...res.result.data],
+          isEndOfList: res.result.data.length < that.data.limit ? true : false,
+          showLoading: false
+        })
+        console.log(that.data.orders)
+      }
+    )
+  },
+
+  /**
+   * 滑动条到底部时触发
+   */
+  onScrollToBottom: function(res){
+    //this.data.isEndOfList || this.onGetData()
   },
 
   /**

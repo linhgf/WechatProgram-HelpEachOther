@@ -23,11 +23,11 @@ page{
   background: #ffffff !important;
 }
 .card_title{
-  font-size: 32rpx;
+  font-size: 16px;
 }
 
 .card_score{
-  font-size:28rpx;
+  font-size:14px;
 }
 
 .van-card{
@@ -43,8 +43,8 @@ page{
 }
 
 .cancel_button{
-  width: 200rpx;
-  font-size: 25rpx;
+  display: inline;
+  font-size: 12px;
   color: #ff3535;
   margin-right: 0;
   background: #ffffff;

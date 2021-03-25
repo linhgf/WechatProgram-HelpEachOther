@@ -76,22 +76,22 @@ Page({
 
 
   /**
-   * 子节点滚动
+   * 滚动
    */
-  onChildScrolling: function(res){
+  onScrolling: function(res){
 
   },
 
   
   /**
-   * 子滑动条到底部时触发
+   * 滑动条到底部时触发
    */
   onScrollToBottom: function(res){
     //this.data.isEndOfList || this.onGetData()
   },
 
   /**
-   * 子滑动条滑动到顶部时
+   * 滑动条滑动到顶部时
    */
   onScrollToTop: function(res){
     

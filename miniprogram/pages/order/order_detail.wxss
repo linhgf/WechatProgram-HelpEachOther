@@ -25,19 +25,19 @@ page{
 }
 
 .van-cell__title{
-  font-size:35rpx;
+  font-size:15px;
 }
 
 .van-cell__label{
-  font-size: 30rpx !important;
+  font-size: 15px !important;
 }
 
 .detail .van-cell__title{
-  font-size:30rpx;
+  font-size:15px;
 }
 
 .detail .van-cell__label{
-  font-size: 30rpx !important;
+  font-size: 15px !important;
 }
 
 .detail{

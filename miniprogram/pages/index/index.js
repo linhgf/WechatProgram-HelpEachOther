@@ -102,7 +102,12 @@ Page({
         refresh_trigger: false
       })
       if(res.result.data[0]._id == that.data.orders[0]._id){
-        Toast("休息休息吧，暂无新订单")
+        Toast("休息休息吧,暂无新订单 (っ°Д°;)っ")
+      }
+      else{
+        that.setData({
+          orders: res.result.data
+        })
       }
     })
   },

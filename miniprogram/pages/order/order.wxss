@@ -4,13 +4,21 @@ page{
 }
 
 #order{
+  display: flex;
+  flex-direction: column;
   height:100%;
 }
 
+
 .content{
+  flex:9;
+  overflow: scroll;
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.scroll{
   height: 100%;
 }
 

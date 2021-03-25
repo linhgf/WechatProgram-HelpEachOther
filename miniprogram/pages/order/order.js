@@ -1,4 +1,5 @@
 // pages/order/order.js
+import Toast from '@vant/weapp/toast/toast'
 
 Page({
 
@@ -6,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    my_orders:[],
+    refresh_trigger: false,
+    orders:[],
     accepted_orders:[]
   },
 
@@ -27,25 +29,57 @@ Page({
 
     // })
     that.setData({
-      my_orders: wx.getStorageSync('my_orders')
+      orders: wx.getStorageSync('my_orders')
     })
     that.changeTime()
+  },
 
-   
+  /**
+   * 下拉刷新加载新数据
+   */
+  onRefreshData: function(){
+    let that = this
+    wx.cloud.callFunction({
+      name: "getOrder",
+      data:{
+        option: "get_private",
+        stuID: getApp().globalData.userinfo.stuID
+      }
+    }).then(res=>{//更新缓存
+      wx.setStorageSync('my_orders', res.result.data)
+      Toast("加载完毕 (oﾟvﾟ)ノ")
+      //更新数据显示内容
+      that.setData({
+        refresh_trigger: false,
+        orders: wx.getStorageSync('my_orders')
+      })
+      that.changeTime()
+    })
   },
 
   /**
    * 将数据库中的时间格式进行转换
    */
   changeTime: function(){
-    for(var i = 0; i < this.data.my_orders.length; i++){
-      var date = new Date(this.data.my_orders[i].publish_time)
+    for(var i = 0; i < this.data.orders.length; i++){
+      var date = new Date(this.data.orders[i].publish_time)
       var create_date_time = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + " " + date.getHours() + ":" + date.getMinutes()
-      var temp_str = 'my_orders['+ i +'].publish_time'
+      var temp_str = 'orders['+ i +'].publish_time'
       this.setData({
         [temp_str]: create_date_time
       }) 
     }
+  },
+
+  onClickOrder: function(res){
+    this.data.orders.forEach(order => {
+      if(order._id == res.currentTarget.dataset.id){
+        wx.setStorageSync('click_order', order)
+        wx.navigateTo({
+          url: '../order/order_detail',
+        })
+      }
+    })
   },
 
   /**

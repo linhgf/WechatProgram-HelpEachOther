@@ -9,6 +9,7 @@ Page({
     showLoading: false,//展示加载图
     orders: [],
     toTop: 0,
+    lastScrollTop: 0,//子节点上次距离top的位置
     limit: 5,//每次获取5条数据
     isEndOfList: false,//为true时代表数据被取完（旧数据，新数据通过刷新获取）
     search_value: null,
@@ -73,18 +74,27 @@ Page({
     }
   },
 
+
   /**
-   * 滚动时触发
+   * 子节点滚动
    */
-  onScrolling: function(res){
-    this.setData({
-      toTop: res.detail.scrollTop
-    })
-    
+  onChildScrolling: function(res){
+
   },
 
+  
+  /**
+   * 子滑动条到底部时触发
+   */
+  onScrollToBottom: function(res){
+    //this.data.isEndOfList || this.onGetData()
+  },
+
+  /**
+   * 子滑动条滑动到顶部时
+   */
   onScrollToTop: function(res){
-    console.log(res)
+    
   },
 
   /**
@@ -108,16 +118,9 @@ Page({
           isEndOfList: res.result.data.length < that.data.limit ? true : false,
           showLoading: false
         })
-        console.log(that.data.orders)
+        that.changeTime()
       }
     )
-  },
-
-  /**
-   * 滑动条到底部时触发
-   */
-  onScrollToBottom: function(res){
-    //this.data.isEndOfList || this.onGetData()
   },
 
   /**

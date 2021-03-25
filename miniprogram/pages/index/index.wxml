@@ -1,4 +1,4 @@
-<scroll-view bindscroll="onScrolling" scroll-y="true" id="index" bindscrolltolower="onScrollToBottom" bindscrolltoupper="onScrollToTop">
+<scroll-view  id="index" >
   
   <view class="top">
     <open-data type="userAvatarUrl" class="user"/>
@@ -13,41 +13,36 @@
     />
   </view>
 
-  <view class="content" >
+  <view class="bottom" >
     <van-dropdown-menu class="menu'">
       <van-dropdown-item value="{{ express_choosed }}" options="{{ express }}" />
       <van-dropdown-item value="{{ sort_choosed }}" options="{{ sort }}" />
     </van-dropdown-menu>
-    <van-dropdown-menu class="menu_toTop" wx:if="{{toTop > 58}}">
-      <van-dropdown-item value="{{ express_choosed }}" options="{{ express }}" />
-      <van-dropdown-item value="{{ sort_choosed }}" options="{{ sort }}" />
-    </van-dropdown-menu>
-    <van-card
-      custom-class="card"
-      wx:for="{{orders}}"
-      wx:for-item="item"
-      desc="{{item.remark}}"
-      bindtap="onClickOrder"
-      wx:key="none"
-      data-id="{{item._id}}"
-    >
-    <view class="card_title" slot="title">
-      {{item.title}}
-    </view>
-    <view class="card_score"  slot="price">
-      {{item.score}} 积分
-    </view> 
-      <view slot="bottom">
-        <van-tag size="medium" plain type="primary">{{item.weight}}</van-tag>
+    <scroll-view refresher-enabled="true" class="content" bindscroll="onChildScrolling" scroll-y="true" upper-threshold="10" lower-threshold="20"  bindscrolltoupper="onScrollToTop" bindscrolltolower="onScrollToBottom">
+        <van-card
+        custom-class="card"
+        wx:for="{{orders}}"
+        wx:for-item="item"
+        desc="{{item.remark}}"
+        bindtap="onClickOrder"
+        wx:key="none"
+        data-id="{{item._id}}"
+      >
+      <view class="card_title" slot="title">
+        {{item.title}}
       </view>
-      <view slot="footer">
-        <view>{{item.publish_time}}</view>
-      </view>
-    </van-card>
-    <van-loading wx:if="{{showLoading}}" size="24px" color="#1E90FF" vertical>在努力加载了...</van-loading>
-    
+      <view class="card_score"  slot="price">
+        {{item.score}} 积分
+      </view> 
+        <view slot="bottom">
+          <van-tag size="medium" plain type="primary">{{item.weight}}</van-tag>
+        </view>
+        <view slot="footer">
+          <view>{{item.publish_time}}</view>
+        </view>
+      </van-card>
+      <van-loading wx:if="{{showLoading}}" size="24px" color="#1E90FF" vertical>在努力加载了...</van-loading>
+    </scroll-view>
   </view>
-
-
 
 </scroll-view>

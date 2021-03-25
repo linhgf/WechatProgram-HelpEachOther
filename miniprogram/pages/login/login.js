@@ -51,6 +51,10 @@ Page({
       //判断输入是否正确
       else{
         let that = this
+        Toast.loading({//显示加载条
+          message: '登录中...',
+          forbidClick: true,
+        })
         wx.cloud.callFunction({
           name: "getUser",
           data: {

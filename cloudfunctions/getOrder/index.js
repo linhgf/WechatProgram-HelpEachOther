@@ -9,6 +9,7 @@ exports.main = async (event, context) => {
   const db = cloud.database()
   const _ = db.command
 
+  //发布订单
   if(event.option == "add"){
     return await db.collection("help_order").add({
       data: {
@@ -30,6 +31,19 @@ exports.main = async (event, context) => {
     })
   }
 
+  //接取订单
+  if(event.option == "take_order"){
+    return await db.collection("help_order").where({
+      _id: event._id
+    }).update({
+      data:{
+        status: "进行中",
+        recipient: event.recipient
+      }
+    })
+  }
+
+  //获取用户个人订单
   if(event.option == "get_private"){
     return await db.collection("help_order").where({
       publisher: event.stuID
@@ -38,9 +52,11 @@ exports.main = async (event, context) => {
     }})
   }
 
-
-  if(event.option == "get"){
-    return await db.collection("help_order").orderBy('publish_time','desc').skip(event.skip).limit(event.limit).get()
+  //根据条数获取订单(只获取未被接取的订单)
+  if(event.option == "get_unTake"){
+    return await db.collection("help_order").where({
+        status: "未接取"
+    }).orderBy('publish_time','desc').skip(event.skip).limit(event.limit).get()
   }
 
   if(event.option == "getAll"){//获取全部订单

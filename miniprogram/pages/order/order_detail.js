@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    order: []
+    order: [],
+    ismine: "false"//判断该订单是否属于本人发布
   },
 
   /**
@@ -15,7 +16,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      order: wx.getStorageSync("click_order")
+      order: wx.getStorageSync("click_order"),
+      ismine: options.ismine
     })
   },
 
@@ -23,8 +25,30 @@ Page({
    * 接取订单
    */
   onTakeOrder: function(){
+    let that = this
+    //判断订单是否由自己发布
     if(this.data.order.publisher == getApp().globalData.userinfo.stuID){
       Toast.fail("无法接取自己发布的订单")
+    }
+    else{
+      //接取订单
+      Dialog.confirm({
+        message: '是否接取订单',
+      }).then(res=>{
+        wx.cloud.callFunction({
+          name: "getOrder",
+          data: {
+            option: "take_order",
+            _id: that.data.order._id,
+            recipient: getApp().globalData.userinfo.stuID
+          }
+        }).then(res=>{
+          wx.reLaunch({
+            url: '../index/index',
+          })
+        })
+      }).catch(()=>{})
+
     }
   },
 

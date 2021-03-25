@@ -47,3 +47,24 @@ page{
 #van-toast{
   text-align: center !important;
 }
+
+.functions{
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: flex-end;
+  bottom: 0;
+  width: 100%;
+  background: #ffffff;
+}
+
+.cancel_btn{
+  margin-right: 0;
+  background: #ffffff;
+  font-size: 15px;
+  color: #ff0000;
+}
+
+.cancel_btn::after{
+  border:none;
+}

@@ -75,9 +75,17 @@ Page({
     this.data.orders.forEach(order => {
       if(order._id == res.currentTarget.dataset.id){
         wx.setStorageSync('click_order', order)
-        wx.navigateTo({
-          url: '../order/order_detail',
-        })
+        if(order.publisher == getApp().globalData.userinfo.stuID){
+          wx.navigateTo({
+            url: '../order/order_detail?ismine=true&&isaccept=false',
+          })
+        }
+        else if(order.recipient == getApp().globalData.userinfo.stuID){
+          wx.navigateTo({
+            url: '../order/order_detail?ismine=false&&isaccept=true',
+          })
+        }
+        
       }
     })
   },

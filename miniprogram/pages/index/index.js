@@ -25,6 +25,10 @@ Page({
       { text: '重量排序（降序）', value: 'b' },
       { text: '重量排序（升序）', value: 'c' },
     ],
+    take: "代取物品",
+    deliver: "代送物品",
+    card_take_logo: "https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/20210325195322.png",
+    card_deliver_logo: "https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/20210325195253.png",
     express_choosed: 0,
     sort_choosed: 'a',
   },
@@ -37,7 +41,7 @@ Page({
     // wx.cloud.callFunction({
     //   name: "getOrder",
     //   data: {
-    //     option: "get",
+    //     option: "get_unTake",
     //     skip: 0,
     //     limit: that.data.limit
     //   }
@@ -52,13 +56,15 @@ Page({
     //     key: 'orders',
     //   })
     // }).then(res=>{
-       
+      
     // })
+
     //缓存中的订单数据
     that.setData({
       orders: wx.getStorageSync('orders')
     })
     that.changeTime()
+  
     
   },
 
@@ -93,7 +99,7 @@ Page({
     wx.cloud.callFunction({
       name: "getOrder",
       data: {
-        option: "get",
+        option: "get_unTake",
         skip: 0,
         limit: that.data.limit
       }
@@ -102,7 +108,7 @@ Page({
         refresh_trigger: false
       })
       if(res.result.data[0]._id == that.data.orders[0]._id){
-        Toast("休息休息吧,暂无新订单 (っ°Д°;)っ")
+        Toast("休息休息吧~暂无新订单 (っ°Д°;)っ")
       }
       else{
         that.setData({
@@ -137,7 +143,7 @@ Page({
     wx.cloud.callFunction({
       name: 'getOrder',
       data: {
-        option: "get",
+        option: "get_unTake",
         skip: that.data.orders.length,
         limit: that.data.limit
       }
@@ -159,9 +165,17 @@ Page({
     this.data.orders.forEach(order => {
       if(order._id == res.currentTarget.dataset.id){
         wx.setStorageSync('click_order', order)
-        wx.navigateTo({
-          url: '../order/order_detail',
-        })
+        if(order.stuID == getApp().globalData.userinfo.stuID){//判断是否为自己发布的订单
+          wx.navigateTo({
+            url: '../order/order_detail?ismine=true',
+          })
+        }
+        else{
+          wx.navigateTo({
+            url: '../order/order_detail?ismine=false',
+          })
+        }
+        
       }
     });
   },

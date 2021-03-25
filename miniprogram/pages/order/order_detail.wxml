@@ -9,7 +9,15 @@
     <van-panel title="包裹大小" desc="{{order.weight}}" />
     <van-panel title="备注" desc="{{order.remark}}" />
   </view>
-  <button class="take_order_button" bindtap="onTakeOrder">
+
+  <view wx:if="{{ismine == 'true'}}" class="functions">
+    <button class="cancel_btn">取消委托</button>
+    <van-button class="cantact_btn" size="normal" color="#1E90FF" icon="https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/20210325220010.png" type="info">
+      联系委托人
+    </van-button>
+  </view>
+
+  <button wx:else class="take_order_button" bindtap="onTakeOrder">
     接受
   </button>
   

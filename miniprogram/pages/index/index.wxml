@@ -3,6 +3,7 @@
     <open-data type="userAvatarUrl" class="user"/>
     <van-search
     class="search"
+    shape="round"
     value="{{ search_value }}"
     placeholder="请输入搜索关键词"
     bind:search="onSearch"
@@ -26,6 +27,7 @@
         desc="{{item.remark}}"
         bindtap="onClickOrder"
         wx:key="none"
+        thumb="{{item.category == take ? card_take_logo : card_deliver_logo}}"
         data-id="{{item._id}}"
       >
       <view class="card_title" slot="title">
@@ -35,7 +37,7 @@
         {{item.score}} 积分
       </view> 
         <view slot="bottom">
-          <van-tag size="medium" plain type="primary">{{item.weight}}</van-tag>
+          <van-tag size="medium" color="#ffae00" plain type="primary">{{item.weight}}</van-tag>
         </view>
         <view slot="footer">
           <view>{{item.publish_time}}</view>

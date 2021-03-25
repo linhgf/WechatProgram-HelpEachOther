@@ -1,10 +1,12 @@
 const app = getApp()
+import Toast from '@vant/weapp/toast/toast'
 
 Page({
   /**
    * 页面的初始数据
    */
   data: {
+    refresh_trigger: false,//为false时关闭loading界面
     topContentLength: 124,//除去卡片 顶部内容占据124
     showLoading: false,//展示加载图
     orders: [],
@@ -82,6 +84,28 @@ Page({
 
   },
 
+  /**
+   * 下拉更新数据
+   */
+  onRefreshData: function(){
+    let that = this
+    //获取数据 覆盖原数据 为5条最新数据
+    wx.cloud.callFunction({
+      name: "getOrder",
+      data: {
+        option: "get",
+        skip: 0,
+        limit: that.data.limit
+      }
+    }).then(res=>{
+      that.setData({
+        refresh_trigger: false
+      })
+      if(res.result.data[0]._id == that.data.orders[0]._id){
+        Toast("休息休息吧，暂无新订单")
+      }
+    })
+  },
   
   /**
    * 滑动条到底部时触发

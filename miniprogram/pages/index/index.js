@@ -40,15 +40,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let that = this
-    // wx.cloud.callFunction({
-    //   name: "getOrder",
-    //   data: {
-    //     option: "get_unTake",
-    //     skip: 0,
-    //     limit: that.data.limit
-    //   }
-    // }).then(res=>{
+       let that = this
+    // this.getData(0,that.data.limit,this.data.express_choosed).then(res=>{
     //   console.log(res)
     //   this.setData({
     //     orders: res.result.data
@@ -59,7 +52,7 @@ Page({
     //     key: 'orders',
     //   })
     // }).then(res=>{
-    
+        
     // })
     //缓存中的订单数据
     that.setData({
@@ -73,7 +66,7 @@ Page({
    * 下拉菜单切换
    */
   onDropDownChange: function(res){
-    console.log(res)
+ 
   },
 
   /**
@@ -117,23 +110,43 @@ Page({
    * 滚动
    */
   onScrolling: function(res){
-
+    
   },
+
 
   /**
    * 获取数据
+   * 
+   * Paramters:
+   *  category:当前页面展示类型
+   *  skip:要跳过的数据个数
+   *  limit:获取的数据个数
+   * Rturns:
+   *  orders数组 
+   */
+  getData: function(skip, limit, category){
+    var option;
+    switch(category){
+      case 0:
+        option = "get_unTake"
+    }
+    return wx.cloud.callFunction({
+      name:"getOrder",
+      data:{
+        options: option,
+        skip: skip,
+        limit: limit
+      }
+    })
+  },
+
+  /**
+   * 下拉刷新获取数据
    */
   onRefreshData: function(){
     let that = this
     //获取数据 覆盖原数据 为5条最新数据
-    wx.cloud.callFunction({
-      name: "getOrder",
-      data: {
-        option: "get_unTake",
-        skip: 0,
-        limit: that.data.limit
-      }
-    }).then(res=>{
+    this.getData(0,that.data.limit,this.data.express_choosed).then(res=>{
       that.setData({
         refresh_trigger: false
       })
@@ -148,36 +161,15 @@ Page({
     })
   },
   
-  /**
-   * 滑动条到底部时触发
+    /**
+   * 到达底部获取数据数据
    */
-  onScrollToBottom: function(res){
-    //this.data.isEndOfList || this.onGetData()
-  },
-
-  /**
-   * 滑动条滑动到顶部时
-   */
-  onScrollToTop: function(res){
-    
-  },
-
-  /**
-   * 滑动条到底部时获取额外数据
-   */
-  onGetData: function(){
+  onScrollToBottomToGetData: function(){
     let that = this
     that.setData({
       showLoading: true
     })
-    wx.cloud.callFunction({
-      name: 'getOrder',
-      data: {
-        option: "get_unTake",
-        skip: that.data.orders.length,
-        limit: that.data.limit
-      }
-    }).then(res=>{//获取完毕
+    this.getData(that.data.orders.length,this.data.limit,this.data.express_choosed).then(res=>{//获取完毕
         that.setData({
           orders: [...that.data.orders,...res.result.data],
           isEndOfList: res.result.data.length < that.data.limit ? true : false,
@@ -188,6 +180,22 @@ Page({
       }
     )
   },
+
+  /**
+   * 滑动条到底部时触发
+   */
+  onScrollToBottom: function(res){
+    //this.data.isEndOfList || this.onScrollToBottomToGetData()
+  },
+
+  /**
+   * 滑动条滑动到顶部时
+   */
+  onScrollToTop: function(res){
+    
+  },
+
+
 
   /**
    * 点击订单进入详细页面

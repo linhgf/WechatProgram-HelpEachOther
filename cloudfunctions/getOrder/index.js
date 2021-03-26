@@ -10,7 +10,7 @@ exports.main = async (event, context) => {
   const _ = db.command
 
   //发布订单
-  if(event.option == "add"){
+  if(event.options == "add"){
     return await db.collection("help_order").add({
       data: {
         address: event.address,
@@ -32,7 +32,7 @@ exports.main = async (event, context) => {
   }
 
   //接取订单
-  if(event.option == "take_order"){
+  if(event.options == "take_order"){
     return await db.collection("help_order").where({
       _id: event._id
     }).update({
@@ -44,7 +44,7 @@ exports.main = async (event, context) => {
   }
 
   //获取用户个人订单
-  if(event.option == "get_private"){
+  if(event.options == "get_private"){
     return await db.collection("help_order").where({
       publisher: event.stuID
     }).get({success: function(res){
@@ -53,13 +53,13 @@ exports.main = async (event, context) => {
   }
 
   //根据条数获取订单(只获取未被接取的订单)
-  if(event.option == "get_unTake"){
+  if(event.options == "get_unTake"){
     return await db.collection("help_order").where({
         status: "未接取"
     }).orderBy('publish_time','desc').skip(event.skip).limit(event.limit).get()
   }
 
-  if(event.option == "getAll"){//获取全部订单
+  if(event.options == "getAll"){//获取全部订单
     return await db.collection("help_order").get()
   }
 }

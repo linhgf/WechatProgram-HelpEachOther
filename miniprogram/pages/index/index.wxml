@@ -19,7 +19,7 @@
       <van-dropdown-item value="{{ sort_choosed }}" options="{{ sort }}" />
     </van-dropdown-menu>
     <view class="content">
-      <scroll-view refresher-triggered="{{refresh_trigger}}"  bindrefresherrefresh="onRefreshData" refresher-enabled="true" class="scroll" bindscroll="onScrolling" scroll-y upper-threshold="10" lower-threshold="20"  bindscrolltoupper="onScrollToTop" bindscrolltolower="onScrollToBottom">
+      <scroll-view refresher-triggered="{{refresh_trigger}}"  bindrefresherrefresh="onRefreshData" refresher-enabled="true" class="scroll" scroll-y upper-threshold="10" lower-threshold="20" bindscrolltolower="onScrollToBottom">
         <van-card
         custom-class="card"
         wx:for="{{orders}}"

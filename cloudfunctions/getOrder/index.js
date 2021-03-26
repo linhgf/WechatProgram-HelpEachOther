@@ -59,6 +59,16 @@ exports.main = async (event, context) => {
     }).orderBy('publish_time','desc').skip(event.skip).limit(event.limit).get()
   }
 
+    //根据条数获取订单(只获取未被接取的大件订单)
+    if(event.options == "get_particular_orders"){
+      return await db.collection("help_order").where({
+          status: "未接取",
+          weight: event.weight
+      }).orderBy('publish_time','desc').skip(event.skip).limit(event.limit).get()
+    }
+
+
+
   if(event.options == "getAll"){//获取全部订单
     return await db.collection("help_order").get()
   }

@@ -9,7 +9,11 @@ Page({
     refresh_trigger: false,//为false时关闭loading界面
     topContentLength: 124,//除去卡片 顶部内容占据124
     showLoading: false,//展示加载图
-    orders: [],
+    show_orders: [],//用于展示
+    orders: [],//容纳全部订单
+    big_orders: [],//容纳全部大订单
+    medium_orders: [],//容纳全部中订单
+    small_orders: [],//容纳全部小订单
     toTop: 0,
     lastScrollTop: 0,//子节点上次距离top的位置
     limit: 5,//每次获取5条数据
@@ -58,6 +62,7 @@ Page({
     that.setData({
       orders: wx.getStorageSync('orders')
     })
+
     that.changeTime()
     that.addLogo()
   },
@@ -66,7 +71,17 @@ Page({
    * 下拉菜单切换
    */
   onDropDownChange: function(res){
- 
+    let that = this
+    var category = res.detail
+    this.getData(0,this.data.limit,res.detail).then(res=>{
+      that.setData({
+        express_choosed: category,
+        orders: res.result.data,
+        isEndOfList: false
+      })
+      that.changeTime()
+      that.addLogo()
+    })
   },
 
   /**
@@ -106,13 +121,6 @@ Page({
   },
 
 
-  /**
-   * 滚动
-   */
-  onScrolling: function(res){
-    
-  },
-
 
   /**
    * 获取数据
@@ -125,17 +133,31 @@ Page({
    *  orders数组 
    */
   getData: function(skip, limit, category){
-    var option;
+    var option,weight;
     switch(category){
       case 0:
         option = "get_unTake"
+        break
+      case 1://获取大件物品订单列表
+        weight = "大件"
+        option = "get_particular_orders"
+        break
+      case 2://获取中件物品订单列表
+        weight = "中件"
+        option = "get_particular_orders"
+        break
+      case 3://获取小件物品订单列表
+        weight = "小件"
+        option = "get_particular_orders"
     }
+
     return wx.cloud.callFunction({
       name:"getOrder",
       data:{
         options: option,
         skip: skip,
-        limit: limit
+        limit: limit,
+        weight: weight
       }
     })
   },
@@ -185,14 +207,7 @@ Page({
    * 滑动条到底部时触发
    */
   onScrollToBottom: function(res){
-    //this.data.isEndOfList || this.onScrollToBottomToGetData()
-  },
-
-  /**
-   * 滑动条滑动到顶部时
-   */
-  onScrollToTop: function(res){
-    
+    this.data.isEndOfList || this.onScrollToBottomToGetData()
   },
 
 

@@ -17,18 +17,21 @@ Page({
     search_value: null,
     express: [
       { text: '全部订单', value: 0 },
-      { text: '代取物品', value: 1 },
-      { text: '代送物品', value: 2 },
+      { text: '大件', value: 1 },
+      { text: '中件', value: 2 },
+      { text: '小件', value: 3 },
     ],
     sort: [
       { text: '默认排序', value: 'a' },
-      { text: '重量排序（降序）', value: 'b' },
-      { text: '重量排序（升序）', value: 'c' },
+      { text: '时间排序（降序）', value: 'b' },
+      { text: '时间排序（升序）', value: 'c' },
     ],
-    take: "代取物品",
-    deliver: "代送物品",
-    card_take_logo: "https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/20210325195322.png",
-    card_deliver_logo: "https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/20210325195253.png",
+    big: "大件",
+    medium:"中件",
+    small:"小件",
+    card_big_logo: "https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/20210326171431.png",
+    card_medium_logo: "https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/20210326171827.png",
+    card_small_logo: "https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/20210326171741.png",
     express_choosed: 0,
     sort_choosed: 'a',
   },
@@ -56,16 +59,21 @@ Page({
     //     key: 'orders',
     //   })
     // }).then(res=>{
-      
+    
     // })
-
     //缓存中的订单数据
     that.setData({
       orders: wx.getStorageSync('orders')
     })
     that.changeTime()
-  
-    
+    that.addLogo()
+  },
+
+  /**
+   * 下拉菜单切换
+   */
+  onDropDownChange: function(res){
+    console.log(res)
   },
 
   /**
@@ -82,6 +90,28 @@ Page({
     }
   },
 
+  /**
+   * 根据不同重量为数据添加logo
+   */
+  addLogo: function(){
+    for(var i = 0; i < this.data.orders.length; i++){
+
+      var temp_str = 'orders['+ i +'].logo'
+      var logo = ""
+      if(this.data.orders[i].weight == this.data.big){
+        logo = this.data.card_big_logo
+      }
+      else if(this.data.orders[i].weight == this.data.medium){
+        logo = this.data.card_medium_logo
+      }
+      else
+        logo = this.data.card_small_logo
+      this.setData({
+        [temp_str]: logo
+      }) 
+    }
+  },
+
 
   /**
    * 滚动
@@ -91,7 +121,7 @@ Page({
   },
 
   /**
-   * 下拉更新数据
+   * 获取数据
    */
   onRefreshData: function(){
     let that = this
@@ -154,6 +184,7 @@ Page({
           showLoading: false
         })
         that.changeTime()
+        that.addLogo()
       }
     )
   },

@@ -9,7 +9,13 @@ Page({
   data: {
     refresh_trigger: false,
     orders:[],
-    accepted_orders:[]
+    accepted_orders:[],
+    big: "大件",
+    medium:"中件",
+    small:"小件",
+    card_big_logo: "https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/20210326171431.png",
+    card_medium_logo: "https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/20210326171827.png",
+    card_small_logo: "https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/20210326171741.png",
   },
 
   /**
@@ -26,14 +32,16 @@ Page({
     // }).then(res=>{
     //   wx.setStorageSync('my_orders', res.result.data)
     // }).then(res=>{
-
+      
     // })
     that.setData({
       orders: wx.getStorageSync('my_orders')
     })
     that.changeTime()
+    that.addLogo()
   },
 
+  
   /**
    * 下拉刷新加载新数据
    */
@@ -54,10 +62,11 @@ Page({
         orders: wx.getStorageSync('my_orders')
       })
       that.changeTime()
+      that.addLogo()
     })
   },
 
-  /**
+    /**
    * 将数据库中的时间格式进行转换
    */
   changeTime: function(){
@@ -69,6 +78,29 @@ Page({
         [temp_str]: create_date_time
       }) 
     }
+  },
+
+  /**
+   * 根据不同重量为数据添加logo
+   */
+  addLogo: function(){
+    for(var i = 0; i < this.data.orders.length; i++){
+
+      var temp_str = 'orders['+ i +'].logo'
+      var logo = ""
+      if(this.data.orders[i].weight == this.data.big){
+        logo = this.data.card_big_logo
+      }
+      else if(this.data.orders[i].weight == this.data.medium){
+        logo = this.data.card_medium_logo
+      }
+      else
+        logo = this.data.card_small_logo
+      this.setData({
+        [temp_str]: logo
+      }) 
+    }
+    console.log(this.data.orders)
   },
 
   onClickOrder: function(res){

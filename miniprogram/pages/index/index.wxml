@@ -15,7 +15,7 @@
 
   <view class="bottom" >
     <van-dropdown-menu class="menu'">
-      <van-dropdown-item value="{{ express_choosed }}" options="{{ express }}" />
+      <van-dropdown-item change="onDropDownChange" value="{{ express_choosed }}" options="{{ express }}" />
       <van-dropdown-item value="{{ sort_choosed }}" options="{{ sort }}" />
     </van-dropdown-menu>
     <view class="content">
@@ -27,7 +27,7 @@
         desc="{{item.remark}}"
         bindtap="onClickOrder"
         wx:key="none"
-        thumb="{{item.category == take ? card_take_logo : card_deliver_logo}}"
+        thumb="{{item.logo}}"
         data-id="{{item._id}}"
       >
       <view class="card_title" slot="title">
@@ -37,7 +37,7 @@
         {{item.score}} 积分
       </view> 
         <view slot="bottom">
-          <van-tag size="medium" color="#ffae00" plain type="primary">{{item.weight}}</van-tag>
+          <van-tag size="medium" color="#1E90FF" plain type="primary">{{item.category}}</van-tag>
         </view>
         <view slot="footer">
           <view>{{item.publish_time}}</view>

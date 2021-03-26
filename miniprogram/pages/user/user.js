@@ -42,6 +42,15 @@ Page({
   },
 
   /**
+   * 前往订单列表
+   */
+  toOrder: function(){
+    wx.reLaunch({
+      url: '../order/order',
+    })
+  },
+
+  /**
    * 登出
    */
   onLoginOut: function(){

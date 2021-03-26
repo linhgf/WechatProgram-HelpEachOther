@@ -15,6 +15,7 @@
       bindtap="onClickOrder"
       wx:key="_id"
       data-id="{{item._id}}"
+      thumb="{{item.logo}}"
       >
       <view class="card_title" slot="title">
         {{item.title}}
@@ -23,7 +24,7 @@
         {{item.score}} 积分
       </view> 
         <view slot="bottom">
-          <van-tag size="medium" plain type="primary">{{item.weight}}</van-tag>
+          <van-tag size="medium" plain type="primary">{{item.category}}</van-tag>
         </view>
         <view slot="footer">
           <view>{{item.publish_time}}</view>

@@ -13,7 +13,7 @@
   <view wx:if="{{ismine == 'true'}}" class="functions">
     <button class="cancel_btn">取消委托</button>
     <van-button class="cantact_btn" size="normal" color="#1E90FF" icon="https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/20210325220010.png" type="info">
-      联系委托人
+      委托详情
     </van-button>
   </view>
 

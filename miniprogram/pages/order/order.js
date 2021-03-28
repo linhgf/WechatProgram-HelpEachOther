@@ -50,13 +50,45 @@ Page({
     this.setData({
       current_tab: res.detail.name
     })
-    this.getData().then(res=>{
-      that.setData({
-        orders: res.result.data
-      })
-      that.changeTime()
-      that.addLogo()
-    })
+    if(that.data.current_tab == 0){//已发布 分类
+      if(!wx.getStorageSync("get_private")){//如无缓存则存入缓存
+        console.log("无缓存")
+        this.getData().then(res=>{
+          that.setData({
+            orders: res.result.data
+          })
+          that.changeTime()
+          that.addLogo()
+          wx.setStorageSync('get_private', that.data.orders)
+        })
+      }
+      else{
+        that.setData({
+          orders: wx.getStorageSync("get_private")
+        })
+      }
+    }
+
+    else{//已接受 分类
+      if(!wx.getStorageSync("get_accept")){//如无缓存则存入缓存
+        console.log("无缓存")
+        this.getData().then(res=>{
+          that.setData({
+            orders: res.result.data
+          })
+          that.changeTime()
+          that.addLogo()
+          wx.setStorageSync('get_accept', that.data.orders)
+        })
+      }
+      else{
+        that.setData({
+          orders: wx.getStorageSync("get_accept")
+        })
+      }
+      
+    }
+
     
   },
 
@@ -73,10 +105,7 @@ Page({
         option = "get_accept"
         break
     }
-    if(!wx.getStorageSync("get_accpet")){
-      console.log(1111)
-    }
-    console.log(wx.getStorageSync("get_accpet"))
+
     return wx.cloud.callFunction({
       name: "getOrder",
       data:{
@@ -100,6 +129,12 @@ Page({
       })
       that.changeTime()
       that.addLogo()
+
+      //存入缓存
+      if(that.data.current_tab == 0)
+        wx.setStorageSync('get_private', that.data.orders)
+      else if(that.data.current_tab == 1)
+        wx.setStorageSync('get_accept', that.data.orders)
     })
   },
 

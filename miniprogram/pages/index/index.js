@@ -179,6 +179,8 @@ Page({
         that.setData({
           orders: res.result.data
         })
+        that.changeTime()
+        that.addLogo()
       }
     })
   },

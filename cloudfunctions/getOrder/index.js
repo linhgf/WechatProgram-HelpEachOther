@@ -43,7 +43,16 @@ exports.main = async (event, context) => {
     })
   }
 
-  //获取用户个人订单
+  //获取个人已接订单
+  if(event.options == "get_accept"){
+    return await db.collection("help_order").where({
+      recipient: event.stuID
+    }).get({success: function(res){
+      return res
+    }})
+  }
+
+  //获取用户个人发布订单
   if(event.options == "get_private"){
     return await db.collection("help_order").where({
       publisher: event.stuID

@@ -1,5 +1,5 @@
 <view id="order">
-  <van-tabs custom-class="tab" active="{{ active }}" bind:change="onChange" color="#1E90FF">
+  <van-tabs custom-class="tab" active="{{ active }}" bind:change="onTabChange" color="#1E90FF">
     <van-tab title="已发布"></van-tab>
     <van-tab title="已接受"></van-tab>
   </van-tabs>

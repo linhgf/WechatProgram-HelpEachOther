@@ -9,6 +9,7 @@ Page({
   data: {
     refresh_trigger: false,
     orders:[],
+    current_tab: 0,
     accepted_orders:[],
     big: "大件",
     medium:"中件",
@@ -42,23 +43,60 @@ Page({
   },
 
   /**
+   * 导航栏切换
+   */
+  onTabChange: function(res){
+    let that = this
+    this.setData({
+      current_tab: res.detail.name
+    })
+    this.getData().then(res=>{
+      that.setData({
+        orders: res.result.data
+      })
+      that.changeTime()
+      that.addLogo()
+    })
+    
+  },
+
+  /**
+   * 根据所在tab获取数据
+   */
+  getData: function(){
+    var option;
+    switch(this.data.current_tab){
+      case 0://已发布 栏目
+        option = "get_private"
+        break
+      case 1://已接受 栏目
+        option = "get_accept"
+        break
+    }
+    if(!wx.getStorageSync("get_accpet")){
+      console.log(1111)
+    }
+    console.log(wx.getStorageSync("get_accpet"))
+    return wx.cloud.callFunction({
+      name: "getOrder",
+      data:{
+        options: option,
+        stuID: getApp().globalData.userinfo.stuID
+      }
+    })
+  },
+
+  /**
    * 下拉刷新加载新数据
    */
   onRefreshData: function(){
     let that = this
-    wx.cloud.callFunction({
-      name: "getOrder",
-      data:{
-        option: "get_private",
-        stuID: getApp().globalData.userinfo.stuID
-      }
-    }).then(res=>{//更新缓存
-      wx.setStorageSync('my_orders', res.result.data)
+    this.getData().then(res=>{//更新缓存
       Toast("加载完毕 (oﾟvﾟ)ノ")
       //更新数据显示内容
       that.setData({
         refresh_trigger: false,
-        orders: wx.getStorageSync('my_orders')
+        orders: res.result.data
       })
       that.changeTime()
       that.addLogo()
@@ -99,7 +137,6 @@ Page({
         [temp_str]: logo
       }) 
     }
-    console.log(this.data.orders)
   },
 
   onClickOrder: function(res){

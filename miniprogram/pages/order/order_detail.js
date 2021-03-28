@@ -38,7 +38,7 @@ Page({
         wx.cloud.callFunction({
           name: "getOrder",
           data: {
-            option: "take_order",
+            options: "take_order",
             _id: that.data.order._id,
             recipient: getApp().globalData.userinfo.stuID
           }

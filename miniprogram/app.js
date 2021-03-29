@@ -14,7 +14,6 @@ App({
     wx.getStorage({
       key: 'userinfo',
       success: res=>{
-        console.log(res)
         if(res.data != null){
           that.globalData.hasUserinfo = true
           that.globalData.userinfo = res.data

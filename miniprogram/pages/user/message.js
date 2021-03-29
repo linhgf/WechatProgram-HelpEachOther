@@ -1,5 +1,4 @@
-// miniprogram/pages/user/message.js
-
+import Toast from '@vant/weapp/toast/toast'
 
 Page({
 
@@ -7,16 +6,70 @@ Page({
    * 页面的初始数据
    */
   data: {
-    result:""
+    message:[],//信息列表
+    refresh_trigger: false,//为false时关闭loading界面
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let that = this
+    wx.cloud.callFunction({
+      name:"getMessage",
+      data:{
+        options:"get",
+        stuID: getApp().globalData.userinfo.stuID
+      }
+    }).then(res=>{
+      that.setData({
+        message: res.result.data
+      })
+      that.changeTime()
+    })
   },
 
+    /**
+   * 将数据库中的时间格式进行转换
+   */
+  changeTime: function(){
+    for(var i = 0; i < this.data.message.length; i++){
+      var date = new Date(this.data.message[i].time)
+      var create_date_time = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + " " + date.getHours() + ":" + date.getMinutes()
+      var temp_str = 'message['+ i +'].time'
+      this.setData({
+        [temp_str]: create_date_time
+      }) 
+    }
+  },
+
+    /**
+   * 下拉刷新获取数据
+   */
+  onRefreshData: function(){
+    let that = this
+    wx.cloud.callFunction({
+      name:"getMessage",
+      data:{
+        options:"get",
+        stuID: getApp().globalData.userinfo.stuID
+      }
+    }).then(res=>{
+      that.setData({
+        refresh_trigger: false
+      })
+      console.log(res,that.data.message[0])
+      if(res.result.data[0]._id == that.data.message[0]._id){
+        Toast("已是最新消息(ノ￣▽￣)")
+      }
+      else{ 
+        that.setData({
+          message: res.result.data
+        })
+        that.changeTime()
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

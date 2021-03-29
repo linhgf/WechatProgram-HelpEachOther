@@ -33,6 +33,13 @@ exports.main = async (event, context) => {
     })
   }
 
+  //获取受托方
+  if(event.options == "get_recipient"){
+    return await db.collection("help_order").where({
+      _id: event._id
+    }).get()
+  }
+
   //完成订单
   if(event.options == "complete_order"){
     return await db.collection("help_order").where({

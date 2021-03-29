@@ -1,4 +1,7 @@
 {
   "disableScroll": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "van-card": "@vant/weapp/card/index",
+    "van-toast": "@vant/weapp/toast/index"
+  }
 }

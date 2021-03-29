@@ -30,7 +30,6 @@ Page({
       wx.getStorage({
         key: 'userinfo',
         success: res=>{
-          console.log(res)
           if(res.data != null){
             getApp().hasUserinfo = true
             getApp().userinfo = res.data

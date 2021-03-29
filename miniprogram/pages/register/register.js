@@ -1,4 +1,3 @@
-// pages/register/register.js
 import Toast from '@vant/weapp/toast/toast'
 
 Page({

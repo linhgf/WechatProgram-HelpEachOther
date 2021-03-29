@@ -34,6 +34,14 @@ exports.main = async (event, context) => {
         accepted: 0,
         finished: 0
       }
+    }).then(res=>{
+      db.collection("help_message").add({
+        data:{
+          content:"欢迎加入互帮大家庭",
+          stuID: event.stuID,
+          title:"欢迎注册使用"
+        }
+      })
     })
   }
   

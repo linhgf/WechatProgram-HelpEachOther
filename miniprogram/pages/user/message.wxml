@@ -1,12 +1,27 @@
 <!--miniprogram/pages/user/message.wxml-->
 <view id="message">
   <view class="title">
-    我的消息
-    <image src="../../icon/message2.png"/>
+    消息列表
   </view>
   <view class="bottom">
-    <scroll-view scroll-y>
-      <view class="content"></view>
+    <scroll-view refresher-triggered="{{refresh_trigger}}"  bindrefresherrefresh="onRefreshData" refresher-enabled="true" scroll-y class="scroll">
+      <van-card
+      wx:for="{{message}}"
+      wx:key="none"
+      wx:for-item="item"
+      data-id="{{item._id}}"
+      custom-class="card"
+      desc="{{item.content}}"
+      thumb="https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/20210329163346.png"
+      >
+        <view class="card_title" slot="title">
+          {{item.title}}
+        </view>
+        <view slot="footer">
+          <view>{{item.time}}</view>
+        </view>
+      </van-card>
     </scroll-view>
   </view>
+  <van-toast id="van-toast"/>
 </view>

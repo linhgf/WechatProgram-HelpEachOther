@@ -46,7 +46,6 @@ Page({
   onLoad: function (options) {
     let that = this
     this.getData(0,that.data.limit,this.data.express_choosed).then(res=>{
-      console.log(res)
       this.setData({
         orders: res.result.data
       })

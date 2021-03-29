@@ -184,6 +184,22 @@ Page({
 
     
   },
+
+  /**
+   * 发送信息
+   */
+  onSendMessage: function(content,title,stuID){
+    console.log(content,title,stuID)
+    wx.cloud.callFunction({
+      name:"getMessage",
+      data:{
+        options: "send_message",
+        title: title,
+        content: content,
+        stuID: stuID
+      }
+    })
+  },
   
   /**
    * 取消订单
@@ -197,11 +213,27 @@ Page({
         name:"getOrder",
         data:{
           options: "cancel_order",
-          _id: that.data.order._id
+          _id: that.data.order._id,
         }
-      }).then(()=>{
-        setTimeout(() => {
-          Toast.success("当前订单已取消")
+      }).then(()=>{//获取受托方信息
+        //发送信息
+        that.onSendMessage("订单标题\"" + that.data.order.title + "\"已取消","订单已取消",getApp().globalData.userinfo.stuID)
+        wx.cloud.callFunction({
+          name:"getOrder",
+          data:{
+            options:"get_recipient",
+            _id: that.data.order._id
+          }
+        }).then(res=>{//给受托方发消息
+          if(!res){
+            that.onSendMessage("订单标题\"" + that.data.order.title + "\"已被取消","发布者已取消订单",res.result.data[0].stuID)
+          }
+        }) 
+        Toast.success("当前订单已取消")
+        setTimeout(() => {   
+          wx.reLaunch({
+            url: '../order/order',
+          })
         }, 2000);
       })
     }).catch(()=>{})

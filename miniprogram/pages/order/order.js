@@ -21,6 +21,16 @@ Page({
   },
 
   /**
+   * 发布订单
+   * @param {*} options 
+   */
+  onPublish: function(){
+    wx.navigateTo({
+      url: '../order/order_publish',
+    })
+  },
+
+  /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {

@@ -41,7 +41,6 @@ Page({
         that.addLogo()
         wx.setStorageSync('get_private', that.data.orders)
         if(that.data.orders.length == 0){//若无发布过订单，显示另一页面内容
-          console.log(111)
           that.setData({
             have_published: fasle
           })

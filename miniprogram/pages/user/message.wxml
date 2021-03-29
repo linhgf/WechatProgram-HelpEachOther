@@ -5,22 +5,27 @@
   </view>
   <view class="bottom">
     <scroll-view refresher-triggered="{{refresh_trigger}}"  bindrefresherrefresh="onRefreshData" refresher-enabled="true" scroll-y class="scroll">
-      <van-card
+      <van-swipe-cell
       wx:for="{{message}}"
       wx:key="none"
       wx:for-item="item"
       data-id="{{item._id}}"
-      custom-class="card"
-      desc="{{item.content}}"
-      thumb="https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/20210329163346.png"
+      right-width="{{ 65 }}"
       >
-        <view class="card_title" slot="title">
-          {{item.title}}
-        </view>
-        <view slot="footer">
-          <view>{{item.time}}</view>
-        </view>
-      </van-card>
+        <van-card
+        custom-class="card"
+        desc="{{item.content}}"
+        thumb="https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/20210329163346.png"
+        >
+          <view class="card_title" slot="title">
+            {{item.title}}
+          </view>
+          <view slot="footer">
+            <view>{{item.time}}</view>
+          </view>
+        </van-card>
+      </van-swipe-cell>
+      <view slot="right">删除</view>
     </scroll-view>
   </view>
   <van-toast id="van-toast"/>

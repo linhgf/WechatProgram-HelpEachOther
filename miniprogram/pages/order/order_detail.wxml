@@ -9,7 +9,7 @@
     <van-panel title="包裹大小" desc="{{order.weight}}" />
     <van-panel title="备注"><view style="transform:translateX(30rpx)">{{order.remark}}</view></van-panel>
     <view class="QRCode" wx:if="{{is_me_accept == 'true'}}">
-      <canvas style="margin:auto;width: 686rpx;height: 686rpx;background:#f1f1f1;" canvas-id="mycanvas"/>
+      <canvas style="margin:auto;width: 400rpx;height: 400rpx;background:#f1f1f1;" canvas-id="mycanvas"/>
       （发布者扫描此二维码以完成订单）
     </view>
     

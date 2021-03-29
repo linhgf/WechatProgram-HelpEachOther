@@ -47,7 +47,6 @@ Page({
   onCreateCode: function(){
     var size = this.setCanvasSize(); //动态设置画布大小
     var code = this.data.order._id+"_"+getApp().globalData.userinfo.stuID
-    console.log(code.split('_'))
     this.createQrCode (code, 'mycanvas', size.w, size.h)
   },
 
@@ -56,7 +55,7 @@ Page({
     var size = {};
     try {
       var res = wx.getSystemInfoSync();
-      var scale = 750 / 686; //不同屏幕下canvas的适配比例；设计稿是750宽
+      var scale = 750 / 400; //不同屏幕下canvas的适配比例；设计稿是750宽
       var width = res.windowWidth / scale;
       var height = width; //canvas画布为正方形
       size.w = width;

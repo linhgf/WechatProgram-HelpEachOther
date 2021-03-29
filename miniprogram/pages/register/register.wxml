@@ -21,6 +21,9 @@
       <van-field  wx:if="{{wrong_confirm_password == false}}" clearable="true" input-class="password_input" model:value="{{ confirm_password }}" placeholder="确认密码" border="{{ false }}" password="true" />
       <van-field wx:if="{{wrong_confirm_password == true}}" clearable="true" input-class="password_input" model:value="{{ confirm_password }}" placeholder="确认密码" error-message="*两次密码输入不一致" border="{{ false }}" password="true" />
     </view>
+    <view class="telephone_block">
+      <van-field clearable="true" input-class="telephone_input" model:value="{{ telephone }}" placeholder="请输入正确的手机号，方便别人联系" border="{{ false }}"/>
+    </view>
   </van-cell-group>
   <van-button class="regist_button" open-type="getUserInfo" bindgetuserinfo="onGetUserinfo" color="linear-gradient(to right, #6495ED, #4169E1)">注册并登录</van-button>
   <button class="login_button" bindtap="onToLogin">已有账号？返回登录</button> 

@@ -51,6 +51,15 @@ Page({
   },
 
   /**
+   * 前往消息列表
+   */
+  toMessage: function(){
+    wx.navigateTo({
+      url: '../user/message',
+    })
+  },
+
+  /**
    * 登出
    */
   onLoginOut: function(){

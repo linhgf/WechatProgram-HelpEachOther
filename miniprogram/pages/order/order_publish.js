@@ -160,7 +160,7 @@ Page({
           message: '确认发布订单',
         }).then(() => {//确认发布
             that.setData({
-              user_score: that.data.user_score - that.data.score
+              user_score: that.data.user_score - that.data.score//扣除积分
             })
             wx.cloud.callFunction({//发布订单 上传到数据库
               name: "getOrder",

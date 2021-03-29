@@ -24,22 +24,28 @@ Page({
    */
   onLoad: function (options) {
     let that = this
-    // wx.cloud.callFunction({
-    //   name: "getOrder",
-    //   data:{
-    //     option: "get_private",
-    //     stuID: getApp().globalData.userinfo.stuID
-    //   }
-    // }).then(res=>{
-    //   wx.setStorageSync('my_orders', res.result.data)
-    // }).then(res=>{
-      
-    // })
-    that.setData({
-      orders: wx.getStorageSync('my_orders')
+    //获取 已接受 栏目信息
+    this.getData(1).then(res=>{
+      console.log("获取 已接受 栏目信息")
+      that.setData({
+        orders: res.result.data
+      })
+      that.changeTime()
+      that.addLogo()
+      wx.setStorageSync('get_accept', that.data.orders)
+    }).then(()=>{
+      //获取 已发布 栏目信息
+      that.getData(0).then(res=>{
+        console.log("获取 已发布 栏目信息")
+        that.setData({
+          orders: res.result.data
+        })
+        that.changeTime()
+        that.addLogo()
+        wx.setStorageSync('get_private', that.data.orders)
+      })
     })
-    that.changeTime()
-    that.addLogo()
+    
   },
 
   /**
@@ -51,42 +57,15 @@ Page({
       current_tab: res.detail.name
     })
     if(that.data.current_tab == 0){//已发布 分类
-      if(!wx.getStorageSync("get_private")){//如无缓存则存入缓存
-        console.log("无缓存")
-        this.getData().then(res=>{
-          that.setData({
-            orders: res.result.data
-          })
-          that.changeTime()
-          that.addLogo()
-          wx.setStorageSync('get_private', that.data.orders)
-        })
-      }
-      else{
         that.setData({
           orders: wx.getStorageSync("get_private")
         })
-      }
     }
 
     else{//已接受 分类
-      if(!wx.getStorageSync("get_accept")){//如无缓存则存入缓存
-        console.log("无缓存")
-        this.getData().then(res=>{
-          that.setData({
-            orders: res.result.data
-          })
-          that.changeTime()
-          that.addLogo()
-          wx.setStorageSync('get_accept', that.data.orders)
-        })
-      }
-      else{
-        that.setData({
-          orders: wx.getStorageSync("get_accept")
-        })
-      }
-      
+      that.setData({
+        orders: wx.getStorageSync("get_accept")
+      })
     }
 
     
@@ -95,9 +74,9 @@ Page({
   /**
    * 根据所在tab获取数据
    */
-  getData: function(){
+  getData: function(tab){
     var option;
-    switch(this.data.current_tab){
+    switch(tab){
       case 0://已发布 栏目
         option = "get_private"
         break
@@ -120,7 +99,7 @@ Page({
    */
   onRefreshData: function(){
     let that = this
-    this.getData().then(res=>{//更新缓存
+    this.getData(that.data.current_tab).then(res=>{//更新缓存
       Toast("加载完毕 (oﾟvﾟ)ノ")
       //更新数据显示内容
       that.setData({
@@ -129,7 +108,6 @@ Page({
       })
       that.changeTime()
       that.addLogo()
-
       //存入缓存
       if(that.data.current_tab == 0)
         wx.setStorageSync('get_private', that.data.orders)
@@ -180,12 +158,12 @@ Page({
         wx.setStorageSync('click_order', order)
         if(order.publisher == getApp().globalData.userinfo.stuID){
           wx.navigateTo({
-            url: '../order/order_detail?ismine=true&&isaccept=false',
+            url: '../order/order_detail?ismine=true&&is_me_accept=false',
           })
         }
         else if(order.recipient == getApp().globalData.userinfo.stuID){
           wx.navigateTo({
-            url: '../order/order_detail?ismine=false&&isaccept=true',
+            url: '../order/order_detail?ismine=false&&is_me_accept=true',
           })
         }
         

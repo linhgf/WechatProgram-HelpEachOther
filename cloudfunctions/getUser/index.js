@@ -12,7 +12,7 @@ exports.main = async (event, context) => {
   const _ = db.command
 
   //更新用户积分
-  if(event.option == "update_score"){
+  if(event.options == "update_score"){
     return await db.collection("help_user").where({
       stuID: event.stuID
     }).update({
@@ -23,20 +23,22 @@ exports.main = async (event, context) => {
   }
   
   //用户注册
-  if(event.option == "add"){
+  if(event.options == "add"){
     return await db.collection('help_user').add({
       data:{
         stuID: event.stuID,
         password: event.password,
+        telephone: event.telephone,
         score: 30,
         published: 0,
-        accepted: 0
+        accepted: 0,
+        finished: 0
       }
     })
   }
   
-  //用户登录
-  else if(event.option == "get"){
+  //获取用户信息
+  else if(event.options == "get"){
     return await db.collection("help_user").where({
       stuID: event.stuID
     }).get({success: function(res){

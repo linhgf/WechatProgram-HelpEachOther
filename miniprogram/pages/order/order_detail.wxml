@@ -4,21 +4,30 @@
     <van-panel title="联系人" desc="{{order.contact}}" />
     <van-panel title="联系方式" desc="{{order.telephone}}" />
     <van-panel title="包裹内容" desc="{{order.pack}}" />
-    <van-panel title="发布时间" desc="{{order.published_time}}" />
+    <van-panel title="发布时间" desc="{{order.publish_time}}" />
     <van-panel title="取件地址" desc="{{order.address}}" />
     <van-panel title="包裹大小" desc="{{order.weight}}" />
-    <van-panel title="备注" desc="{{order.remark}}" />
+    <van-panel title="备注"><view style="transform:translateX(30rpx)">{{order.remark}}</view></van-panel>
+    <view class="QRCode" wx:if="{{is_me_accept == 'true'}}">
+      <canvas style="margin:auto;width: 686rpx;height: 686rpx;background:#f1f1f1;" canvas-id="mycanvas"/>
+      （发布者扫描此二维码以完成订单）
+    </view>
+    
   </view>
-
+  
   <view wx:if="{{ismine == 'true'}}" class="functions">
     <button class="cancel_btn">取消委托</button>
-    <van-button class="cantact_btn" size="normal" color="#1E90FF" icon="https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/20210325220010.png" type="info">
+    <van-button bind:click="onGetDetail" class="cantact_btn" size="normal" color="#1E90FF" icon="https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/20210325220010.png" type="info">
       委托详情
     </van-button>
   </view>
 
-  <button wx:else class="take_order_button" bindtap="onTakeOrder">
-    接受
+  <button style="background:#ff0000" wx:elif="{{is_me_accept == 'true'}}" class="order_button" bindtap="onTakeOrder">
+    放弃委托
+  </button>
+
+  <button wx:else class="order_button" bindtap="onTakeOrder">
+    接受委托
   </button>
   
   <van-dialog id="van-dialog" />

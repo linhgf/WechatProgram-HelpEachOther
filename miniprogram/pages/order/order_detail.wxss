@@ -14,8 +14,12 @@ page{
   flex-direction: column;
 }
 
-.take_order_button{
+.order_button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
+  z-index: 99;
   background: #1E90FF;
   width: 100%;
   height: 80rpx;
@@ -63,6 +67,14 @@ page{
   background: #ffffff;
   font-size: 15px;
   color: #ff0000;
+}
+
+.QRCode{
+  display: flex;
+  width: 100%;
+  color: rgb(109, 109, 109);
+  flex-direction: column;
+  align-items: center;
 }
 
 .cancel_btn::after{

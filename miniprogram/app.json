@@ -6,7 +6,8 @@
     "pages/order/order",
     "pages/order/order_detail",
     "pages/order/order_publish",
-    "pages/register/register"
+    "pages/register/register",
+    "pages/user/message"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

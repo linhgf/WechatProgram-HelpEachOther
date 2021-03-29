@@ -9,6 +9,32 @@ exports.main = async (event, context) => {
   const db = cloud.database()
   const _ = db.command
 
+  //完成订单
+  if(event.options == "complete_order"){
+    db.collection("help_order").where({
+      _id: event._id
+    }).update({
+      data: {
+        status: "已完成"
+      }
+    })
+    db.collection("help_user").where({
+      stuID: event.stuID
+    }).update({
+      data:{
+        score: event.score,
+        finished: event.finished
+      }
+    })
+  }
+
+  //查询订单
+  if(event.options == "select"){
+    return await db.collection("help_order").where({
+      _id: event._id
+    }).get()
+  }
+
   //发布订单
   if(event.options == "add"){
     return await db.collection("help_order").add({
@@ -23,6 +49,7 @@ exports.main = async (event, context) => {
         score: event.score,
         status: "未接取",
         recipient: "",
+        recipient_telpehone: "",
         title: event.title,
         weight: event.weight,
         telephone: event.telephone,
@@ -38,7 +65,8 @@ exports.main = async (event, context) => {
     }).update({
       data:{
         status: "进行中",
-        recipient: event.recipient
+        recipient: event.recipient,
+        recipient_telpehone: event.recipient_telpehone
       }
     })
   }
@@ -46,7 +74,8 @@ exports.main = async (event, context) => {
   //获取个人已接订单
   if(event.options == "get_accept"){
     return await db.collection("help_order").where({
-      recipient: event.stuID
+      recipient: event.stuID,
+      status:"进行中"
     }).get({success: function(res){
       return res
     }})
@@ -55,7 +84,8 @@ exports.main = async (event, context) => {
   //获取用户个人发布订单
   if(event.options == "get_private"){
     return await db.collection("help_order").where({
-      publisher: event.stuID
+      publisher: event.stuID,
+      status:_.neq("已完成")
     }).get({success: function(res){
       return res
     }})

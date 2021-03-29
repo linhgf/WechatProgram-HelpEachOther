@@ -58,7 +58,7 @@ Page({
         wx.cloud.callFunction({
           name: "getUser",
           data: {
-            option: "get",
+            options: "get",
             stuID: that.data.stuID
           }
         }).then(res=>{

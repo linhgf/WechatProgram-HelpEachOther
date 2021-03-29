@@ -44,27 +44,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-       let that = this
-    // this.getData(0,that.data.limit,this.data.express_choosed).then(res=>{
-    //   console.log(res)
-    //   this.setData({
-    //     orders: res.result.data
-    //   })
-    // }).then(res=>{
-    //   wx.setStorage({
-    //     data: this.data.orders,
-    //     key: 'orders',
-    //   })
-    // }).then(res=>{
-        
-    // })
-    //缓存中的订单数据
-    that.setData({
-      orders: wx.getStorageSync('orders')
+    let that = this
+    this.getData(0,that.data.limit,this.data.express_choosed).then(res=>{
+      console.log(res)
+      this.setData({
+        orders: res.result.data
+      })
+    }).then(res=>{
+      wx.setStorage({
+        data: this.data.orders,
+        key: 'orders',
+      })
+    }).then(res=>{
+      //缓存中的订单数据
+      that.setData({
+        orders: wx.getStorageSync('orders')
+      })
+
+      that.changeTime()
+      that.addLogo()
     })
 
-    that.changeTime()
-    that.addLogo()
   },
 
   /**
@@ -150,7 +150,6 @@ Page({
         weight = "小件"
         option = "get_particular_orders"
     }
-
     return wx.cloud.callFunction({
       name:"getOrder",
       data:{

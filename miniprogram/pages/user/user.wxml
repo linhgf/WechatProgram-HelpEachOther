@@ -36,7 +36,7 @@
       <image src="../../icon/order.png"></image>
       <text>订单管理</text>
     </view>
-    <view class="message logo">
+    <view class="message logo" bindtap="toMessage">
       <image src="../../icon/message.png"></image>
       <text>消息</text>
     </view>

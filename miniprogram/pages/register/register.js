@@ -11,6 +11,7 @@ Page({
     openid: "",
     password: "",
     confirm_password: "",
+    telephone: "",
     exited_stuID: false,
     wrong_confirm_password: false,
     wrong_length_password: false,
@@ -35,7 +36,7 @@ Page({
    */
   onCheckInput: function(){
     //判定用户信息是否填写完整
-    if(this.data.stuID == "" || this.data.password == "" || this.data.confirm_password == ""){      
+    if(this.data.stuID == "" || this.data.password == "" || this.data.confirm_password == "" || this.data.telephone == ""){      
       Toast.fail('账号密码不得为空')
       return false
     }
@@ -101,7 +102,8 @@ Page({
                 data:{
                 option: "add",
                 stuID: this.data.stuID,
-                password: this.data.password
+                password: this.data.password,
+                telephone: this.data.telephone
                 }
               }).then(res=>{//注册成功后 转入主页
                 console.log("注册成功")

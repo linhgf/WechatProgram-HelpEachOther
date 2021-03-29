@@ -50,11 +50,11 @@ page{
   width: 70%;
 }
 
-.username_input, .password_input{
+.username_input, .password_input, .telephone_input{
   width: 100% !important;
 }
 
-.username_block, .password_block{
+.username_block, .password_block, .telephone_block{
   margin: 20rpx;
 }
 

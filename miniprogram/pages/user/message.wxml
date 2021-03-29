@@ -1,0 +1,12 @@
+<!--miniprogram/pages/user/message.wxml-->
+<view id="message">
+  <view class="title">
+    我的消息
+    <image src="../../icon/message2.png"/>
+  </view>
+  <view class="bottom">
+    <scroll-view scroll-y>
+      <view class="content"></view>
+    </scroll-view>
+  </view>
+</view>

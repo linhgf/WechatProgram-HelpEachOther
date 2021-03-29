@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    have_published: "true",//判断用户是否发布过订单
     refresh_trigger: false,
     orders:[],
     current_tab: 0,
@@ -26,23 +27,25 @@ Page({
     let that = this
     //获取 已接受 栏目信息
     this.getData(1).then(res=>{
-      console.log("获取 已接受 栏目信息")
-      that.setData({
-        orders: res.result.data
-      })
+      that.data.orders = res.result.data
       that.changeTime()
       that.addLogo()
       wx.setStorageSync('get_accept', that.data.orders)
     }).then(()=>{
       //获取 已发布 栏目信息
       that.getData(0).then(res=>{
-        console.log("获取 已发布 栏目信息")
         that.setData({
           orders: res.result.data
         })
         that.changeTime()
         that.addLogo()
         wx.setStorageSync('get_private', that.data.orders)
+        if(that.data.orders.length == 0){//若无发布过订单，显示另一页面内容
+          console.log(111)
+          that.setData({
+            have_published: fasle
+          })
+        }
       })
     })
     

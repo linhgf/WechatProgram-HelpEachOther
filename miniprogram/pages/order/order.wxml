@@ -1,4 +1,4 @@
-<view id="order">
+<view wx:if="{{have_published == 'true'}}" id="order">
   <van-tabs custom-class="tab" active="{{ active }}" bind:change="onTabChange" color="#1E90FF">
     <van-tab title="已发布"></van-tab>
     <van-tab title="已接受"></van-tab>

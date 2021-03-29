@@ -15,7 +15,8 @@ exports.main = async (event, context) => {
       data:{
         content:event.content,
         stuID: event.stuID,
-        title: event.title
+        title: event.title,
+        time: db.serverDate()
       }
 
   })

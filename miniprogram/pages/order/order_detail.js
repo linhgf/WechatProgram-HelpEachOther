@@ -254,8 +254,13 @@ Page({
           _id: that.data.order._id
         }
       }).then(()=>{
+        Toast.success("已放弃当前订单")
+        that.onSendMessage("订单\""+that.data.order.title+"\"已取消","已放弃订单",getApp().globalData.userinfo.stuID)//发送给受托方
+        that.onSendMessage("订单\""+that.data.order.title+"\"已被放弃","订单被放弃",that.data.order.publisher)//发送给委托方
         setTimeout(() => {
-          Toast.success("已放弃当前订单")
+          wx.reLaunch({
+            url: '../order/order',
+          })
         }, 2000);
       })
     }).catch(()=>{})
@@ -280,10 +285,12 @@ Page({
           data: {
             options: "take_order",
             _id: that.data.order._id,
-            recipient_telpehone: getApp().globalData.userinfo.recipient_telpehone,
+            recipient_telpehone: getApp().globalData.userinfo.telpehone,
             recipient: getApp().globalData.userinfo.stuID
           }
-        }).then(res=>{
+        }).then(res=>{//发送信息
+          that.onSendMessage("已接取订单\""+that.data.order.title+"\"","成功接取订单",getApp().globalData.userinfo.stuID)//发送给受托方
+          that.onSendMessage("订单\""+that.data.order.title+"\"已被接取,联系方式:" + getApp().globalData.userinfo.telephone,"订单被接取",that.data.order.publisher)//发送给委托方
           wx.reLaunch({
             url: '../index/index',
           })

@@ -16,13 +16,13 @@
   </view>
   
   <view wx:if="{{ismine == 'true'}}" class="functions">
-    <button class="cancel_btn">取消委托</button>
+    <button class="cancel_btn" bindtap="onCancel">取消委托</button>
     <van-button bind:click="onGetDetail" class="cantact_btn" size="normal" color="#1E90FF" icon="https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/20210325220010.png" type="info">
       委托详情
     </van-button>
   </view>
 
-  <button style="background:#ff0000" wx:elif="{{is_me_accept == 'true'}}" class="order_button" bindtap="onTakeOrder">
+  <button bindtap="onGiveup" style="background:#ff0000" wx:elif="{{is_me_accept == 'true'}}" class="order_button">
     放弃委托
   </button>
 

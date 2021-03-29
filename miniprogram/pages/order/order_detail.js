@@ -46,7 +46,9 @@ Page({
    */
   onCreateCode: function(){
     var size = this.setCanvasSize(); //动态设置画布大小
-    this.createQrCode (this.data.order._id, 'mycanvas', size.w, size.h)
+    var code = this.data.order._id+"_"+getApp().globalData.userinfo.stuID
+    console.log(code.split('_'))
+    this.createQrCode (code, 'mycanvas', size.w, size.h)
   },
 
   //适配不同屏幕大小的canvas
@@ -76,7 +78,9 @@ Page({
         that.setData({
           QR_result: res.result
         })
-        if(that.data.QR_result == that.data.order._id){//订单号正确
+        let orderID = that.data.QR_result.split("_")[0]//当前订单号
+        let stuID = that.data.QR_result.split("_")[1]//订单接取者id
+        if(orderID == that.data.order._id){//订单号正确
           Dialog.confirm({
             message: '是否确认完成该订单',
             confirmButtonText: '确认',
@@ -85,10 +89,9 @@ Page({
               name: "getUser",
               data:{
                 options: "get",
-                stuID: getApp().globalData.userinfo.stuID
+                stuID: stuID
               }
             }).then(res=>{//更新订单信息以及用户相应信息（完成订单数、积分）
-              console.log(11111)
               wx.cloud.callFunction({
                 name:"getOrder",
                 data:{
@@ -99,7 +102,7 @@ Page({
                   finished: res.result.data[0].finished + 1
                 }
               }).then(res=>{//更改完数据后回调
-                Toast.success('订单已完成~辛苦了！');
+                Toast.success('订单已完成~！');
                 setTimeout(function () {
                   wx.reLaunch({
                     url: '../order/order',
@@ -115,7 +118,7 @@ Page({
             name: "getOrder",
             data:{
               options: "select",
-              _id: that.data.QR_result
+              _id: orderID
             }
           }).then(res=>{
             if(res.result.data[0].publisher == getApp().globalData.userinfo.stuID){//当前订单发布者为当前用户 询问用户是否跳转到另一个订单中
@@ -180,6 +183,50 @@ Page({
     }
 
     
+  },
+  
+  /**
+   * 取消订单
+   */
+  onCancel: function(){
+    let that = this
+    Dialog.confirm({
+      message: '是否取消当前订单?',
+    }).then(res=>{
+      wx.cloud.callFunction({
+        name:"getOrder",
+        data:{
+          options: "cancel_order",
+          _id: that.data.order._id
+        }
+      }).then(()=>{
+        setTimeout(() => {
+          Toast.success("当前订单已取消")
+        }, 2000);
+      })
+    }).catch(()=>{})
+  },
+
+  /**
+   * 放弃订单
+   */
+  onGiveup: function(res){
+    let that = this
+    Dialog.confirm({
+      message: '是否放弃当前订单?',
+    }).then(res=>{
+      wx.cloud.callFunction({
+        name:"getOrder",
+        data:{
+          options: "giveup_order",
+          _id: that.data.order._id
+        }
+      }).then(()=>{
+        setTimeout(() => {
+          Toast.success("已放弃当前订单")
+        }, 2000);
+      })
+    }).catch(()=>{})
   },
 
   /**

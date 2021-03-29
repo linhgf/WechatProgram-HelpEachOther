@@ -9,23 +9,49 @@ exports.main = async (event, context) => {
   const db = cloud.database()
   const _ = db.command
 
+  //(受托方)放弃订单
+  if(event.options == "giveup_order"){
+    db.collection("help_order").where({
+      _id: event._id
+    }).update({
+      data:{
+        recipient:"",
+        recipient_telpehone:"",
+        status:"未接取"
+      }
+    })
+  }
+
+  //(委托方)取消委托
+  if(event.options == "cancel_order"){
+    db.collection("help_order").where({
+      _id: event._id
+    }).update({
+      data:{
+        status: "已取消"
+      }
+    })
+  }
+
   //完成订单
   if(event.options == "complete_order"){
-    db.collection("help_order").where({
+    return await db.collection("help_order").where({
       _id: event._id
     }).update({
       data: {
         status: "已完成"
       }
-    })
-    db.collection("help_user").where({
-      stuID: event.stuID
-    }).update({
-      data:{
-        score: event.score,
-        finished: event.finished
-      }
-    })
+    }).then(
+      db.collection("help_user").where({
+        stuID: event.stuID
+      }).update({
+        data:{
+          score: event.score,
+          finished: event.finished
+        }
+      })
+    )
+    
   }
 
   //查询订单
@@ -85,7 +111,7 @@ exports.main = async (event, context) => {
   if(event.options == "get_private"){
     return await db.collection("help_order").where({
       publisher: event.stuID,
-      status:_.neq("已完成")
+      status:_.neq("已完成").and(_.neq("已取消"))
     }).get({success: function(res){
       return res
     }})

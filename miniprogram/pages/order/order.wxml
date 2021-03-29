@@ -29,10 +29,6 @@
         <view slot="footer">
           <view>{{item.publish_time}}</view>
         </view>
-        <view slot="footer">
-          <button wx:if="{{current_tab == 0}}" class="cancel_button" color="#ff0000" >取消委托</button>
-          <button wx:if="{{current_tab == 1}}" class="cancel_button" color="#ff0000" >放弃委托</button>
-        </view>
       </van-card>
     
     </scroll-view >

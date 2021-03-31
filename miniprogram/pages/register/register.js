@@ -36,7 +36,7 @@ Page({
   onCheckInput: function(){
     //判定用户信息是否填写完整
     if(this.data.stuID == "" || this.data.password == "" || this.data.confirm_password == "" || this.data.telephone == ""){      
-      Toast.fail('账号密码不得为空')
+      Toast.fail('请保证信息填写完整')
       return false
     }
 
@@ -77,6 +77,11 @@ Page({
     //登录
     if(this.onCheckInput() == true){
       //获取openid
+      let that = this
+      Toast.loading({//显示加载条
+        message: '登录中...',
+        forbidClick: true,
+      })
       wx.cloud.callFunction({
         name: "login",
       }).then(res=>{
@@ -86,7 +91,7 @@ Page({
         wx.cloud.callFunction({
           name:"getUser",
           data: {
-            option: "get",
+            options: "get",
             stuID: this.data.stuID
           }
         }).then(res=>{//获取到对应信息
@@ -99,16 +104,26 @@ Page({
               wx.cloud.callFunction({
                 name: "getUser",
                 data:{
-                option: "add",
+                options: "add",
                 stuID: this.data.stuID,
                 password: this.data.password,
                 telephone: this.data.telephone
                 }
               }).then(res=>{//注册成功后 转入主页
-                console.log("注册成功")
-                wx.reLaunch({
-                  url: '../index/index',
+                wx.cloud.callFunction({
+                  name: "getUser",
+                  data: {
+                    options: "get",
+                    stuID: that.data.stuID
+                  }
+                }).then(res=>{
+                  getApp().globalData.hasUserinfo = true
+                  getApp().globalData.userinfo = res.result.data[0]
+                  wx.reLaunch({
+                    url: '../index/index',
+                  })
                 })
+                
               })
           }
           else{

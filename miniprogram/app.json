@@ -12,13 +12,13 @@
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#1E90FF",
+    "navigationBarBackgroundColor": "#2C61FF",
     "navigationBarTitleText": "校园互助代送平台",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "color": "#7A7E83",
-    "selectedColor": "#1E90FF",
+    "selectedColor": "#2C61FF",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [

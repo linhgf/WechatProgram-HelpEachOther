@@ -15,7 +15,7 @@ page{
   display: flex;
   width: 100%;
   flex-direction: column;
-  background: #1E90FF;
+  background-image: url("https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/20210331150520.png");
 }
 
 
@@ -75,6 +75,7 @@ page{
 .publish_button{
   transform: translateY(80rpx);
   width: 90%;
+  box-shadow:0px 5px 15px -2px #1E90FF;
 }
 
 .order_finished{

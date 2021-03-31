@@ -46,7 +46,7 @@
     </view>
   </view>
 
-<van-button class="publish_button" size="large" bindtap="onPublish" block type="default" color="#1E90FF">发布订单</van-button>
+<van-button class="publish_button" size="large" bindtap="onPublish" block type="default" color="#2C61FF">发布订单</van-button>
 
 
   <view class="other_function">

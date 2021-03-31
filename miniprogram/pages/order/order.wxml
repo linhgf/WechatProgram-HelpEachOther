@@ -1,14 +1,14 @@
-<view class="empty"  wx:if="{{have_published == 'true'}}">
+<view class="empty"  wx:if="{{have_published == 'false'}}">
   <van-empty
   class="custom-image"
   image="https://img.yzcdn.cn/vant/custom-empty-image.png"
   description="暂时还没有发布过订单"
   />
-  <van-button class="publish_button" size="large" bindtap="onPublish" block type="default" color="#1E90FF">发布你的第一条订单</van-button>
+  <van-button class="publish_button" size="large" bindtap="onPublish" block type="default" color="#2C61FF">发布你的第一条订单</van-button>
 </view>
 
 
-<view wx:if="{{have_published == 'false'}}" id="order">
+<view wx:if="{{have_published == 'true'}}" id="order">
   <van-tabs custom-class="tab" active="{{ active }}" bind:change="onTabChange" color="#1E90FF">
     <van-tab title="已发布"></van-tab>
     <van-tab title="已接受"></van-tab>

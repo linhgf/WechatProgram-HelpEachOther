@@ -21,7 +21,7 @@
   </view>
 
   <view class="team_name">
-    <text>@北京师范大学珠海分校校园互助代送</text>
+    <text>@北 京 师 范 大 学 珠 海 分 校 校 园互 助 代 送</text>
   </view>
   <van-toast id="van-toast" />
 </view>

@@ -39,7 +39,8 @@ exports.main = async (event, context) => {
         data:{
           content:"欢迎加入互帮大家庭",
           stuID: event.stuID,
-          title:"欢迎注册使用"
+          title:"欢迎注册使用",
+          time: db.serverDate()
         }
       })
     })

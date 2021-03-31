@@ -27,6 +27,7 @@
   </van-cell-group>
   <van-button class="regist_button" open-type="getUserInfo" bindgetuserinfo="onGetUserinfo" color="linear-gradient(to right, #6495ED, #4169E1)">注册并登录</van-button>
   <button class="login_button" bindtap="onToLogin">已有账号？返回登录</button> 
+  <van-toast id="van-toast" />
 </view>
 
 <view class="team_name">

@@ -20,7 +20,7 @@ page{
   justify-content: center;
   position: fixed;
   z-index: 99;
-  background: #1E90FF;
+  background: #2C61FF;
   width: 100%;
   height: 80rpx;
   color: white;

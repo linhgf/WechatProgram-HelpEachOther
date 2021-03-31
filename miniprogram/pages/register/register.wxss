@@ -1,7 +1,7 @@
 /* pages/login/login.wxss */
 page{
   height: 100%;
-  background:#1E90FF;
+  background:#2C61FF;
 }
 
 /*整个界面样式*/

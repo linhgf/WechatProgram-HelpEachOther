@@ -8,7 +8,7 @@
     placeholder="请输入搜索关键词"
     bind:search="onSearch"
     bind:change="onSearchChange"
-    background="#1E90FF"
+    background="#2C61FF"
     input-align="left"
     />
   </view>
@@ -16,7 +16,7 @@
   <view class="bottom" >
     <van-dropdown-menu class="menu'">
       <van-dropdown-item bind:change="onDropDownChange" value="{{ express_choosed }}" options="{{ express }}" />
-      <van-dropdown-item value="{{ sort_choosed }}" options="{{ sort }}" />
+      <van-dropdown-item bind:change="onDropDownChange" value="{{ sort_choosed }}" options="{{ sort }}" />
     </van-dropdown-menu>
     <view class="content">
       <scroll-view refresher-triggered="{{refresh_trigger}}"  bindrefresherrefresh="onRefreshData" refresher-enabled="true" class="scroll" scroll-y upper-threshold="10" lower-threshold="20" bindscrolltolower="onScrollToBottom">

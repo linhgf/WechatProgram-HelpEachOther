@@ -27,8 +27,6 @@ Page({
     ],
     sort: [
       { text: '默认排序', value: 'a' },
-      { text: '时间排序（降序）', value: 'b' },
-      { text: '时间排序（升序）', value: 'c' },
     ],
     big: "大件",
     medium:"中件",

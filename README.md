@@ -6,7 +6,7 @@
 # 部分功能展示  
 <div style="align: center">
 <img src="https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/WeChatProgram-HelpEachOtherShow/20210331165912.gif"/>
+懒加载实现
 </div>
-![]()
 
-<center>懒加载实现</center>
+<center></center>

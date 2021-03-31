@@ -4,4 +4,3 @@
 ![](https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/20210331092433.gif)  
 ![](https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/20210331091456.gif)  
 ![](https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/20210331092556.gif)
-![](https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/20210331092556.gif)

@@ -146,7 +146,7 @@ Page({
     wx.cloud.callFunction({
       name: "getUser",
       data:{
-        option: "get",
+        options: "get",
         stuID: getApp().globalData.userinfo.stuID
       }
     }).then(res=>{
@@ -165,7 +165,7 @@ Page({
             wx.cloud.callFunction({//发布订单 上传到数据库
               name: "getOrder",
               data: {
-                option: "add",
+                options: "add",
                 address: that.data.address,
                 award: that.data.award,
                 category: that.data.category,
@@ -184,7 +184,7 @@ Page({
               wx.cloud.callFunction({
                 name: "getUser",
                 data: {
-                  option: "update_score",
+                  options: "update_score",
                   stuID: getApp().globalData.userinfo.stuID,
                   score: getApp().globalData.userinfo.score
                 }

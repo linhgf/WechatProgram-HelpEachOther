@@ -206,6 +206,8 @@ Page({
    */
   onScrollToBottom: function(res){
     this.data.isEndOfList || this.onScrollToBottomToGetData()
+    if(this.data.isEndOfList)
+      Toast("已经滑到底了~ (っ°Д°;)っ")
   },
 
 
@@ -217,7 +219,7 @@ Page({
     this.data.orders.forEach(order => {
       if(order._id == res.currentTarget.dataset.id){
         wx.setStorageSync('click_order', order)
-        if(order.stuID == getApp().globalData.userinfo.stuID){//判断是否为自己发布的订单
+        if(order.publisher == getApp().globalData.userinfo.stuID){//判断是否为自己发布的订单
           wx.navigateTo({
             url: '../order/order_detail?ismine=true',
           })

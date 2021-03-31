@@ -96,12 +96,14 @@ Page({
                 data:{
                   options: "complete_order",
                   _id: that.data.order._id,
-                  stuID: getApp().globalData.userinfo.stuID,
+                  stuID: stuID,
                   score: res.result.data[0].score + that.data.order.score,
                   finished: res.result.data[0].finished + 1
                 }
               }).then(res=>{//更改完数据后回调
-                Toast.success('订单已完成~！');
+                that.onSendMessage("订单\""+that.data.order.title+"\"已完成","订单已完成",stuID)//发送给受托方
+                that.onSendMessage("订单\""+that.data.order.title+"\"已完成","订单已完成",getApp().globalData.userinfo.stuID)//发送给委托方
+                Toast.success('订单已完成');
                 setTimeout(function () {
                   wx.reLaunch({
                     url: '../order/order',
@@ -284,7 +286,7 @@ Page({
           data: {
             options: "take_order",
             _id: that.data.order._id,
-            recipient_telpehone: getApp().globalData.userinfo.telpehone,
+            recipient_telpehone: getApp().globalData.userinfo.telephone,
             recipient: getApp().globalData.userinfo.stuID
           }
         }).then(res=>{//发送信息

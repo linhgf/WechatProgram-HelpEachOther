@@ -1,4 +1,5 @@
 # WechatProgram-HelpEachOther
+***
 基于云开发的微信小程序 校园互帮互助  
 使用到的技术框架：qrCode二维码生成及vant-weapp组件库  
 实现校园内互帮互助，通过发布订单的形式来让他人得知自身需求  

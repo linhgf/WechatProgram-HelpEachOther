@@ -6,10 +6,13 @@
 接取订单后，受托者会获取到一个二维码，需让委托者扫描二维码后确认完成订单，有利于物品顺利交到委托者手上  
 # 部分功能展示  
 ***
+第一格表头 | 第二格表头
+
 * 懒加载实现
->![](https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/WeChatProgram-HelpEachOtherShow/20210331165912.gif)
-* 下拉刷新数据
+>![](https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/WeChatProgram-HelpEachOtherShow/20210331165912.gif) | * 下拉刷新数据
 >![](https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/WeChatProgram-HelpEachOtherShow/20210331170612.gif)
+
+
 * 分类展示  
 >![](https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/WeChatProgram-HelpEachOtherShow/20210331170400.gif)  
 * 接取订单

@@ -1,12 +1,18 @@
-# 云开发 quickstart
+# WechatProgram-HelpEachOther
+***
+基于云开发的微信小程序-校园互帮互助小程序端   
+使用到的技术框架：qrCode二维码生成、vant-weapp组件库以及小程序云开发服务  
+动态生成二维码，实现一单一码  
 
-这是云开发的快速启动指引，其中演示了如何上手使用云开发的三大基础能力：
+# 部分功能展示  
+***
+懒加载实现 |  下拉刷新
+--- | ---
+![](https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/WeChatProgram-HelpEachOtherShow/20210331165912.gif) | ![](https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/WeChatProgram-HelpEachOtherShow/20210331170612.gif)
 
-- 数据库：一个既可在小程序前端操作，也能在云函数中读写的 JSON 文档型数据库
-- 文件存储：在小程序前端直接上传/下载云端文件，在云开发控制台可视化管理
-- 云函数：在云端运行的代码，微信私有协议天然鉴权，开发者只需编写业务逻辑代码
 
-## 参考文档
+分类展示   |  接取订单
+--- | ---
+![](https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/WeChatProgram-HelpEachOtherShow/20210331170400.gif)   | ![](https://cdn.jsdelivr.net/gh/linhgf/PicGo/img/WeChatProgram-HelpEachOtherShow/20210331170455.gif)  
 
-- [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
 
